@@ -10,19 +10,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.Constants.DriveBasePorts;
-import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.ClimbCommand;
-import frc.robot.commands.FourBarClose;
-import frc.robot.commands.FourBarCommand;
-import frc.robot.commands.RuletaClose;
-import frc.robot.commands.RuletaCommand;
-import frc.robot.commands.RuletaOpen;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.VisionCommand;
+import frc.robot.commands.DriveBase.*;
+import frc.robot.commands.FourBar.FourBarClose;
+import frc.robot.commands.FourBar.FourBarOpen;
+import frc.robot.commands.Climb.*;
+import frc.robot.commands.Roulette.*;
+import frc.robot.commands.Shooter.*;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
@@ -38,26 +33,36 @@ import frc.robot.subsystems.Vision;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  Shooter m_Shooter = new Shooter();
-  DriveBase m_DriveBase = new DriveBase();
-  Climb m_Climb = new Climb();
-  Ruleta m_Ruleta = new Ruleta();
-  FourBar m_FourBar = new FourBar();
-  XboxController m_XController = new XboxController(1);
-  Joystick m_Joystick = new Joystick(0);
-  Vision m_vision = new Vision(m_DriveBase);
-  
 
+  Shooter m_Shooter;
+  DriveBase m_DriveBase;
+  Climb m_Climb;
+  FourBar m_FourBar;
+  Ruleta m_Ruleta ;
+  XboxController m_XController;
+  Joystick m_Joystick;
+  Vision m_vision;
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_Shooter.setDefaultCommand(new ShooterCommand(m_XController, m_Shooter, m_FourBar));
+    
+    m_XController = new XboxController(1);
+    m_Joystick = new Joystick(0);
+    m_FourBar = new FourBar();
+
+    m_Shooter = new Shooter();
+    m_Climb = new Climb();
+    m_Ruleta = new Ruleta();
+    
+    m_vision = new Vision(m_DriveBase);
+    m_DriveBase = new DriveBase();
+
+    
+    //m_Shooter.setDefaultCommand(new ShooterCommand(m_XController, m_Shooter, m_FourBar));
     m_Climb.setDefaultCommand(new ClimbCommand(m_XController, m_Climb));
-    m_Ruleta.setDefaultCommand(new RuletaCommand(m_XController, m_Ruleta));
+    m_Ruleta.setDefaultCommand(new RouletteCommand(m_XController, m_Ruleta, m_FourBar));
     m_DriveBase.setDefaultCommand(new ArcadeDrive(m_DriveBase, m_Joystick));
-    
-    
     
     // Configure the button bindings
     configureButtonBindings();
@@ -71,12 +76,11 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
+    new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_XController, m_FourBar));
+    new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_XController,m_FourBar));
     new JoystickButton(m_Joystick, 1).whenPressed(new VisionCommand(m_vision, m_Joystick, m_DriveBase, m_Shooter,m_FourBar, m_XController));
-    new JoystickButton(m_XController, 8).whenPressed(new RuletaOpen(m_Ruleta));
-    new JoystickButton(m_XController, 7).whenPressed(new RuletaClose(m_Ruleta));
-    new POVButton(m_XController, 0).whenPressed(new FourBarCommand(m_XController, m_FourBar));
-    new POVButton(m_XController, 180).whenPressed(new FourBarClose(m_FourBar)); 
+    new JoystickButton(m_XController, 8).whenPressed(new RouletteOpen(m_Ruleta));
+    new JoystickButton(m_XController, 7).whenPressed(new RouletteClose(m_Ruleta));
   }
 
 

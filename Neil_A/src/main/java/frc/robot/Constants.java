@@ -19,20 +19,20 @@ public final class Constants {
     public final class ShootersPorts{
        public static final int Shooter = 52;
        public static final int Loading = 50; 
-       public static final int Angel = 11;
-       public static final int Delivery = 56;
+       public static final int Angle = 56;
+       public static final int Delivery = 49;
     }
     public final class ClimbPorts{
-        public static final int Elevators = 1;
-        public static final int winch = 20;
+        public static final int Elevators = 47;
+        public static final int winch = 0;
     }
     public final class RuletaPorts{
-        public static final int Ruleta = 3;
-        public static final int wheel = 11;
+        public static final int Ruleta = 46;
+        public static final int wheel = 21;
     }
     public final class FourBarPorts{
-        public static final int Intake = 49;
-        public static final int Fourbar = 0;
+        public static final int Intake = 48;
+        public static final int Fourbar = 11;
     }
     public final class DriveBasePorts{
         public static final int RightOne = 12;
@@ -42,5 +42,24 @@ public final class Constants {
         public static final int LeftOne = 15;
         public static final int LeftTwo = 55;
         public static final int LeftThree = 54;
+    }
+
+    public final class XboxButtons{
+        public static final int ButtonA = 1;
+        public static final int ButtonB = 2;
+        public static final int ButtonX = 3;
+        public static final int ButtonY = 4;
+        public static final int ButtonLB = 5;
+        public static final int ButtonRB = 6;
+        public static final int ButtonLeftSmall = 7;
+        public static final int ButtonRightSmall = 8;
+        public static final int PovButtonUp = 0;
+        public static final int PovButtonDown = 180;
+        public static final int RawAxisYLeft = 1;
+        public static final int RawAxisXLeft = 0;
+        public static final int RawAxisYRight = 5;
+        public static final int RawAxisXRight = 4;
+        public static final int RawAxisRT =2;
+        public static final int RawAxisLT =3;
     }
 }

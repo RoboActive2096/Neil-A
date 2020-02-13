@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -23,7 +23,6 @@ public class ShooterCommand extends CommandBase {
   m_FourBar = FB;
   m_Shooter = SH;
   addRequirements(SH);
-  addRequirements(FB);
   }
 
   // Called when the command is initially scheduled.
@@ -42,8 +41,8 @@ public class ShooterCommand extends CommandBase {
     }
 
     if(m_xController.getRawButton(2)){
-      m_Shooter.setLodingSpeed(-0.9);
-      m_Shooter.setDeliveryspeed(0.35);
+      m_Shooter.setLodingSpeed(0.9);
+      m_Shooter.setDeliveryspeed(-0.35);
       m_FourBar.setIntakeSpeed(-0.5);
     }else{
       m_Shooter.setLodingSpeed(0.0);
@@ -53,22 +52,14 @@ public class ShooterCommand extends CommandBase {
 
 
     if(m_xController.getRawAxis(1)<-0.2){
-      m_Shooter.microprint();
-      if(!m_Shooter.getmax()){
         //pressed 
-        m_Shooter.setAngelspeed(0.0);
-      }else{
         m_Shooter.setAngelspeed(0.35);
-      }
     }else if(m_xController.getRawAxis(1)>0.2){
-      if(m_Shooter.getmin()){
-        m_Shooter.setAngelspeed(0.0);
+      m_Shooter.setAngelspeed(-0.35);
+     
       }else{
-        m_Shooter.setAngelspeed(-0.35);
+        m_Shooter.setAngelspeed(0.0);
       }
-    }else{
-      m_Shooter.setAngelspeed(0.0);
-    }
    
 
   }

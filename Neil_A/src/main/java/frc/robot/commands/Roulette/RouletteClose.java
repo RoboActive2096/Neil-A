@@ -5,19 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Roulette;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Ruleta;
 
-public class RuletaClose extends CommandBase {
+public class RouletteClose extends CommandBase {
   /**
    * Creates a new RuletaClose.
    */
   Ruleta m_Ruleta;
-  public RuletaClose(Ruleta R) {
+  
+  public RouletteClose(Ruleta R ) {
     m_Ruleta = R;
+    
     addRequirements(R);
+  
   }
 
   // Called when the command is initially scheduled.
@@ -42,7 +46,7 @@ public class RuletaClose extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(m_Ruleta.getClose()){
+    if(1==1){
       return false;
     }else{
       return true;

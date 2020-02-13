@@ -5,54 +5,51 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Roulette;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Climb;
+import frc.robot.Constants;
+import frc.robot.subsystems.FourBar;
+import frc.robot.subsystems.Ruleta;
 
-public class ClimbCommand extends CommandBase {
+public class RouletteCommand extends CommandBase {
   /**
-   * Creates a new ClimbCommand.
+   * Creates a new RuletaCommand.
    */
-  XboxController m_xController;
-  Climb m_Climb;
-  public ClimbCommand(XboxController XC, Climb CB) {
-  m_Climb = CB;
-  m_xController = XC;
-  addRequirements(CB);
+  Ruleta m_Ruleta;
+  XboxController m_XboxController;
+  public RouletteCommand(XboxController XC, Ruleta R, FourBar FB) {
+  m_Ruleta = R;
+  m_XboxController = XC;
+  addRequirements(R);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double RawaxisX = m_xController.getRawAxis(5)-0.3;
-    double RawaxisY = m_xController.getRawAxis(5)+0.3;
-    if(m_xController.getRawAxis(5)>0.2){
-      m_Climb.setElevators(RawaxisX);
-    }else if(m_xController.getRawAxis(5)<-0.2){
-      m_Climb.setElevators(RawaxisY);
-    }else{
-      m_Climb.setElevators(0.0);
-    }
-    if(m_xController.getRawButton(1)){
-      m_Climb.setwinchSpeed(0.9);
-    }else{
-      m_Climb.setwinchSpeed(0.0);
-    }
-  
-    
+    if(m_Ruleta.getOpen()){
+      if(m_XboxController.getRawAxis(2)>0.2){
+        m_Ruleta.setWheelaspeed(1.0);
+      }else{
+        m_Ruleta.setWheelaspeed(0.0);
+      }
+}else{
+  m_Ruleta.setWheelaspeed(0.0);
+}
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    
   }
 
   // Returns true when the command should end.

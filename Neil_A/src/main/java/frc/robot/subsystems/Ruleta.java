@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -19,8 +20,8 @@ public class Ruleta extends SubsystemBase {
   /**
    * Creates a new Ruleta.
    */
-  VictorSP Ruleta = new VictorSP(Constants.RuletaPorts.Ruleta);
-  TalonSRX wheel = new TalonSRX(Constants.RuletaPorts.wheel);
+  VictorSPX Ruleta = new VictorSPX(Constants.RuletaPorts.Ruleta);
+  VictorSPX wheel = new VictorSPX(Constants.RuletaPorts.wheel);
   DigitalInput micrDigitalInputOpen = new DigitalInput(2);
   DigitalInput micrDigitalInputClose = new DigitalInput(3);
   public Ruleta() {
@@ -36,7 +37,7 @@ public class Ruleta extends SubsystemBase {
   }
 
   public void setRuletaspeed(double speed){
-  Ruleta.set(speed);
+  Ruleta.set(ControlMode.PercentOutput, speed);
   }
 
   public void setWheelaspeed(double speed){

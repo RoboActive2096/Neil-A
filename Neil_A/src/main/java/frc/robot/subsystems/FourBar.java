@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -19,17 +20,18 @@ public class FourBar extends SubsystemBase {
   /**
    * Creates a new FourBar.
    */
-  VictorSPX Intake = new VictorSPX(Constants.FourBarPorts.Intake);
-  VictorSPX Fourbar = new VictorSPX(Constants.FourBarPorts.Fourbar);
-  
+  VictorSPX Intake;
+  TalonSRX FourbarMotor;
   public FourBar() {
-
+    FourbarMotor = new TalonSRX(Constants.FourBarPorts.Fourbar); 
+    Intake = new VictorSPX(Constants.FourBarPorts.Intake);
+    
   }
   public void setIntakeSpeed(double speed){
     Intake.set(ControlMode.PercentOutput, speed);
   }
   public void setFourbarSpeed(double speed){
-    Fourbar.set(ControlMode.PercentOutput, speed);
+    FourbarMotor.set(ControlMode.PercentOutput, speed);
   }
 
   @Override

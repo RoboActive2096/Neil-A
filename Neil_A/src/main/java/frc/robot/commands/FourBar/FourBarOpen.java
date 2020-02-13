@@ -5,53 +5,58 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.FourBar;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Ruleta;
+import frc.robot.subsystems.FourBar;
 
-public class RuletaCommand extends CommandBase {
+public class FourBarOpen extends CommandBase {
   /**
-   * Creates a new RuletaCommand.
+   * Creates a new FourBarOpen.
    */
-  Ruleta m_Ruleta;
   XboxController m_XboxController;
-  public RuletaCommand(XboxController XC, Ruleta R) {
-  m_Ruleta = R;
-  m_XboxController = XC;
-  addRequirements(R);
+  FourBar m_FourBar;
+  Timer time;
+  public FourBarOpen(XboxController xController,FourBar fourBar) {
+    m_XboxController=xController;
+    m_FourBar=fourBar;
+    time = new Timer();
+    addRequirements(fourBar);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    time.stop();
+    time.reset();
+    time.start();
+    m_FourBar.setIntakeSpeed(-0.8);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_Ruleta.getOpen()){
-      if(m_XboxController.getRawAxis(2)>0.2){
-        m_Ruleta.setWheelaspeed(1.0);
-      }else{
-        m_Ruleta.setWheelaspeed(0.0);
-      }
-}else{
-  m_Ruleta.setWheelaspeed(0.0);
-}
 
+    m_FourBar.setFourbarSpeed(-0.3);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_FourBar.setFourbarSpeed(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(time.get()>1.4){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

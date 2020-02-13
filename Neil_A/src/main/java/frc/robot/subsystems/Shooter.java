@@ -27,8 +27,8 @@ public class Shooter extends SubsystemBase {
   TalonFX Shooter = new TalonFX(Constants.ShootersPorts.Shooter);
   VictorSPX Loding = new VictorSPX(Constants.ShootersPorts.Loading);
   ShooterPID shooterPIDClass = new ShooterPID(Shooter, 1.16, 0.000, 0.0005, 0.02, 0, 0.0);  
-  TalonSRX Angle = new TalonSRX(Constants.ShootersPorts.Angel);
-  TalonSRX Delivery = new TalonSRX(Constants.ShootersPorts.Delivery);
+  TalonSRX Angle = new TalonSRX(Constants.ShootersPorts.Angle);
+  VictorSPX Delivery = new VictorSPX(Constants.ShootersPorts.Delivery);
   DigitalInput maxDigitalInput = new DigitalInput(1);
   DigitalInput minDigitalInput = new DigitalInput(0);
   Timer time;

@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,8 +19,8 @@ public class Climb extends SubsystemBase {
   /**
    * Creates a new Climb.
    */
-  VictorSP Elevators = new VictorSP(Constants.ClimbPorts.Elevators);
-  TalonSRX winch = new TalonSRX(Constants.ClimbPorts.winch);
+  VictorSPX Elevators = new VictorSPX(Constants.ClimbPorts.Elevators);
+  VictorSPX winch = new VictorSPX(Constants.ClimbPorts.winch);
   public Climb() {
 
   }
@@ -29,7 +30,7 @@ public class Climb extends SubsystemBase {
   }
 
   public void setElevators(double speed){
-    Elevators.set(speed);
+    Elevators.set(ControlMode.PercentOutput, speed);
   }
 
   @Override

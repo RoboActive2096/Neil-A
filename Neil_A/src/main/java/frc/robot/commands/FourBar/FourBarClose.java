@@ -5,22 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.FourBar;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FourBar;
 
 public class FourBarClose extends CommandBase {
   /**
-   * Creates a new FourBarClose.
+   * Creates a new FourBarOpen.
    */
-  Timer time;
+  XboxController m_XboxController;
   FourBar m_FourBar;
-  public FourBarClose(FourBar FBI) {
-  m_FourBar = FBI;
-  time = new Timer();
-  addRequirements(FBI);
+  Timer time;
+  public FourBarClose(XboxController xController,FourBar fourBar) {
+    m_XboxController=xController;
+    m_FourBar=fourBar;
+    time = new Timer();
+    addRequirements(fourBar);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -35,23 +38,25 @@ public class FourBarClose extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_FourBar.setFourbarSpeed(-0.5);
+
+    m_FourBar.setFourbarSpeed(0.3);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_FourBar.setFourbarSpeed(0.0);
+    m_FourBar.setIntakeSpeed(0.0);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>0.8){
+    if(time.get()>1.4){
       return true;
     }else{
       return false;
     }
-   
   }
 }
