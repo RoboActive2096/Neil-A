@@ -11,16 +11,16 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.FourBar;
-import frc.robot.subsystems.Ruleta;
+import frc.robot.subsystems.Roulette;
 
 public class RouletteCommand extends CommandBase {
   /**
-   * Creates a new RuletaCommand.
+   * Creates a new RouletteCommand.
    */
-  Ruleta m_Ruleta;
+  Roulette m_Roulette;
   XboxController m_XboxController;
-  public RouletteCommand(XboxController XC, Ruleta R, FourBar FB) {
-  m_Ruleta = R;
+  public RouletteCommand(XboxController XC, Roulette R, FourBar FB) {
+  m_Roulette = R;
   m_XboxController = XC;
   addRequirements(R);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -35,9 +35,9 @@ public class RouletteCommand extends CommandBase {
   @Override
   public void execute() {
     if(m_XboxController.getRawAxis(2)>0.5){
-      m_Ruleta.setWheelaspeed(0.5);
+      m_Roulette.setWheelaspeed(0.5);
     }else{
-      m_Ruleta.setWheelaspeed(0.0);
+      m_Roulette.setWheelaspeed(0.0);
     }
 
 

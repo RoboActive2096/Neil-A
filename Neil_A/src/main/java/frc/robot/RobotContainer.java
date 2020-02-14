@@ -25,7 +25,7 @@ import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.RelayTest;
-import frc.robot.subsystems.Ruleta;
+import frc.robot.subsystems.Roulette;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
 
@@ -42,7 +42,7 @@ public class RobotContainer {
   DriveBase m_DriveBase;
   Climb m_Climb;
   FourBar m_FourBar;
-  Ruleta m_Ruleta ;
+  Roulette m_Roulette ;
   RelayTest rt;
   XboxController m_XController;
   Joystick m_Joystick;
@@ -59,7 +59,7 @@ public class RobotContainer {
     m_FourBar = new FourBar();
     m_Shooter = new Shooter();
     m_Climb = new Climb();
-    m_Ruleta = new Ruleta();
+    m_Roulette = new Roulette();
     rt = new RelayTest();
     m_vision = new Vision(m_DriveBase);
     m_DriveBase = new DriveBase();
@@ -68,7 +68,7 @@ public class RobotContainer {
     
     m_Shooter.setDefaultCommand(new ShooterCommand(m_XController, m_Shooter,m_Joystick));
     m_Climb.setDefaultCommand(new ClimbCommand(m_XController, m_Climb));
-    m_Ruleta.setDefaultCommand(new RouletteCommand(m_XController, m_Ruleta, m_FourBar));
+    m_Roulette.setDefaultCommand(new RouletteCommand(m_XController, m_Roulette, m_FourBar));
     m_DriveBase.setDefaultCommand(new ArcadeDrive(m_DriveBase, m_Joystick));
     // Configure the button bindings
     configureButtonBindings();
@@ -91,8 +91,8 @@ public class RobotContainer {
     //new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightAxisButton).whenPressed(new turnOffFlash(rt,GlobalFlashState));
 
     new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
-    new JoystickButton(m_XController, 8).whenPressed(new RouletteOpen(m_Ruleta));
-    new JoystickButton(m_XController, 7).whenPressed(new RouletteClose(m_Ruleta));
+    new JoystickButton(m_XController, 8).whenPressed(new RouletteOpen(m_Roulette));
+    new JoystickButton(m_XController, 7).whenPressed(new RouletteClose(m_Roulette));
   }
 
 

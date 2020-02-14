@@ -26,8 +26,8 @@ public final class Constants {
         public static final int Elevators = 47;
         public static final int winch = 0;
     }
-    public final class RuletaPorts{
-        public static final int Ruleta = 46;
+    public final class RoulettePorts{
+        public static final int Roulette = 46;
         public static final int wheel = 21;
     }
     public final class FourBarPorts{

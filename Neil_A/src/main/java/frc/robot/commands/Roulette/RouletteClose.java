@@ -8,17 +8,16 @@
 package frc.robot.commands.Roulette;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.FourBar;
-import frc.robot.subsystems.Ruleta;
+import frc.robot.subsystems.Roulette;
 
 public class RouletteClose extends CommandBase {
   /**
-   * Creates a new RuletaClose.
+   * Creates a new RouletteClose.
    */
-  Ruleta m_Ruleta;
+  Roulette m_Roulette;
   
-  public RouletteClose(Ruleta R ) {
-    m_Ruleta = R;
+  public RouletteClose(Roulette R ) {
+    m_Roulette = R;
     addRequirements(R);
   
   }
@@ -32,20 +31,20 @@ public class RouletteClose extends CommandBase {
   @Override
   public void execute() {
   
-    m_Ruleta.setRuletaspeed(-0.35);
+    m_Roulette.setRoulettespeed(-0.35);
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Ruleta.setRuletaspeed(0.0);
+    m_Roulette.setRoulettespeed(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(!m_Ruleta.getClose()){
+    if(!m_Roulette.getClose()){
       return true;
     }else{
       return false;

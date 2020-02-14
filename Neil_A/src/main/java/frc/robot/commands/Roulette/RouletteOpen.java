@@ -7,18 +7,17 @@
 
 package frc.robot.commands.Roulette;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Ruleta;
+import frc.robot.subsystems.Roulette;
 
 public class RouletteOpen extends CommandBase {
   /**
-   * Creates a new RuletaOpen.
+   * Creates a new RouletteOpen.
    */
 
-  Ruleta m_Ruleta;
-  public RouletteOpen(Ruleta RU) {
-    m_Ruleta = RU;
+  Roulette m_Roulette;
+  public RouletteOpen(Roulette RU) {
+    m_Roulette = RU;
     addRequirements(RU);
   }
 
@@ -33,21 +32,21 @@ public class RouletteOpen extends CommandBase {
   public void execute() {
     System.out.println("0.4");
 
-    m_Ruleta.setRuletaspeed(0.4);
+    m_Roulette.setRoulettespeed(0.4);
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-   m_Ruleta.setRuletaspeed(0.1);
+   m_Roulette.setRoulettespeed(0.1);
    System.out.println("end");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(!m_Ruleta.getOpen()){
+    if(!m_Roulette.getOpen()){
       System.out.println("done");
       return true;
     }

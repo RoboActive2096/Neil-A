@@ -25,7 +25,6 @@ public class FourBar extends SubsystemBase {
   public FourBar() {
     FourbarMotor = new TalonSRX(Constants.FourBarPorts.Fourbar); 
     Intake = new VictorSPX(Constants.FourBarPorts.Intake);
-    
   }
   public void setIntakeSpeed(double speed){
     Intake.set(ControlMode.PercentOutput, speed);

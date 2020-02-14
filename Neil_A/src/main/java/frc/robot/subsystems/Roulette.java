@@ -16,15 +16,15 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Ruleta extends SubsystemBase {
+public class Roulette extends SubsystemBase {
   /**
-   * Creates a new Ruleta.
+   * Creates a new Roulette.
    */
-  VictorSPX Ruleta = new VictorSPX(Constants.RuletaPorts.Ruleta);
-  VictorSPX wheel = new VictorSPX(Constants.RuletaPorts.wheel);
+  VictorSPX Roulette = new VictorSPX(Constants.RoulettePorts.Roulette);
+  VictorSPX wheel = new VictorSPX(Constants.RoulettePorts.wheel);
   DigitalInput max = new DigitalInput(2);
   DigitalInput min = new DigitalInput(3);
-  public Ruleta() {
+  public Roulette() {
 
   }
 
@@ -36,8 +36,8 @@ public class Ruleta extends SubsystemBase {
     return min.get();
   }
 
-  public void setRuletaspeed(double speed){
-    Ruleta.set(ControlMode.PercentOutput, speed);
+  public void setRoulettespeed(double speed){
+    Roulette.set(ControlMode.PercentOutput, speed);
 
   }
 
