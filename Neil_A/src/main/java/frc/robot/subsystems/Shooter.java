@@ -15,6 +15,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,7 +34,10 @@ public class Shooter extends SubsystemBase {
   DigitalInput maxDigitalInput = new DigitalInput(0);
   DigitalInput minDigitalInput = new DigitalInput(1);
   Timer time;
-  public Shooter() {
+  XboxController m_XController;
+
+  public Shooter(XboxController xController) {
+    m_XController = xController;
     Angle.configFactoryDefault();
     Angle.setNeutralMode(NeutralMode.Brake);
     time = new Timer();
@@ -56,10 +61,18 @@ public class Shooter extends SubsystemBase {
   public void setAngelspeed(double speed){
     if(speed>0 && !maxDigitalInput.get()){
       speed=0.0;
+
+      m_XController.setRumble(RumbleType.kLeftRumble, 1.0);
+      m_XController.setRumble(RumbleType.kRightRumble, 1.0);
     }else if(speed<0 && !minDigitalInput.get()){
       speed=0.0;
       setEncoderAngleChanger(0);
+
+      m_XController.setRumble(RumbleType.kLeftRumble, 1.0);
+      m_XController.setRumble(RumbleType.kRightRumble, 1.0);
     }
+    m_XController.setRumble(RumbleType.kLeftRumble, 0.0);
+    m_XController.setRumble(RumbleType.kRightRumble, 0.0);
 
     Angle.set(ControlMode.PercentOutput, speed);
 

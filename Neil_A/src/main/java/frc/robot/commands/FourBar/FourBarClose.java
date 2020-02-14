@@ -53,7 +53,7 @@ public class FourBarClose extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>1){
+    if(time.get()>0.5){
       return true;
     }else{
       return false;

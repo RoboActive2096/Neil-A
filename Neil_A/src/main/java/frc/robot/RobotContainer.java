@@ -57,7 +57,7 @@ public class RobotContainer {
     m_XController = new XboxController(1);
     m_Joystick = new Joystick(0);
     m_FourBar = new FourBar();
-    m_Shooter = new Shooter();
+    m_Shooter = new Shooter(m_XController);
     m_Climb = new Climb();
     m_Roulette = new Roulette();
     rt = new RelayTest();
