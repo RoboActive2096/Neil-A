@@ -59,6 +59,8 @@ public final class Constants {
         
         public static final int PovButtonUp = 0;
         public static final int PovButtonDown = 180;
+        public static final int PovButtonRight = 90;
+        public static final int PovButtonLeft = 270;
         public static final int RawAxisYLeft = 1;
         public static final int RawAxisXLeft = 0;
         public static final int RawAxisYRight = 5;

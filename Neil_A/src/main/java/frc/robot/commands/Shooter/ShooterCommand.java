@@ -37,7 +37,7 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void execute() {
     if(m_xController.getRawAxis(3)>0.2){
-     m_Shooter.setShooterSpeed(0.6); //was 0.728
+     m_Shooter.setShooterSpeed(0.45); //was 0.728
     }else{
       m_Shooter.stop();
     }
