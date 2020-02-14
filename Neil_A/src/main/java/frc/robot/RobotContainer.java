@@ -85,6 +85,7 @@ public class RobotContainer {
     new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_XController, m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_XController,m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonRight).whenPressed(new FourBarHalfOpen(m_XController,m_FourBar));
+    new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_XController,m_FourBar));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
     //new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftAxisButton).whenPressed(new turnOnFlash(rt,GlobalFlashState));
     //new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightAxisButton).whenPressed(new turnOffFlash(rt,GlobalFlashState));

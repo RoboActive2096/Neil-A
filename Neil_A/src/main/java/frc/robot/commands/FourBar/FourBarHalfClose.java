@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FourBar;
 
-public class FourBarHalfOpen extends CommandBase {
+public class FourBarHalfClose extends CommandBase {
   /**
    * Creates a new FourBarOpen.
    */
   XboxController m_XboxController;
   FourBar m_FourBar;
   Timer time;
-  public FourBarHalfOpen(XboxController xController,FourBar fourBar) {
+  public FourBarHalfClose(XboxController xController,FourBar fourBar) {
     m_XboxController=xController;
     m_FourBar=fourBar;
     time = new Timer();
@@ -39,7 +39,7 @@ public class FourBarHalfOpen extends CommandBase {
   @Override
   public void execute() {
 
-    m_FourBar.setFourbarSpeed(-0.5);
+    m_FourBar.setFourbarSpeed(0.5);
   }
 
   // Called once the command ends or is interrupted.
@@ -51,7 +51,7 @@ public class FourBarHalfOpen extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>0.59){
+    if(time.get()>0.51){
       return true;
     }else{
       return false;
