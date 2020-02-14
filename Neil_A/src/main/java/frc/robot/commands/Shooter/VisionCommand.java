@@ -29,7 +29,7 @@ public class VisionCommand extends CommandBase {
   private Timer time;
   private double now;
   private double angle;
-  private final double target = 128.0;
+  private final double target = 256.0;
   private FourBar m_fBar;
   private XboxController m_XboxController;
 
@@ -42,10 +42,14 @@ public class VisionCommand extends CommandBase {
   private final double I = 0.00045;//0.000008;
   private final double D = 0.0073;//0.00007*47*0.015; //P*0.01
 */
-  private final double P = 0.15;//0.00007*47; //0.00007*40
+  private final double P = 0.633;//0.00007*47; //0.00007*40
   private final double I = 0.0;//0.000008;
-  private final double D = 0.00005;//0.00007*47*0.015; //P*0.01
-
+  private final double D = 0.0018;//0.00007*47*0.015; //P*0.01
+  /*
+    private final double P = 0.15;//0.00007*47; //0.00007*40
+    private final double I = 0.0;//0.000008;
+    private final double D = 0.00005;//0.00007*47*0.015; //P*0.01
+*/
   private double integral , previous_error;
   public VisionCommand(Vision vision,Joystick joystick,DriveBase _DriveBase, Shooter shooter, FourBar FB, XboxController xbox) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -69,6 +73,7 @@ public class VisionCommand extends CommandBase {
     m_DriveBase.setLeft(0.0);
     m_DriveBase.setRight(0.0);
     m_vision.startProcess();
+    time.delay(0.8);
     time.stop();
     time.reset();
     time.start();
@@ -123,7 +128,8 @@ public class VisionCommand extends CommandBase {
 
   public double PID_calc(double _now){
     double spd = 0.0;
-    double error = ((this.target - _now)/256)*2;
+    //double error = ((this.target - _now)/256)*2;
+    double error = ((this.target - _now)/512);
     SmartDashboard.putNumber("error", error*100);
     this.integral +=(error *I);
     double derivative = (error - this.previous_error) / 0.02;
@@ -169,11 +175,14 @@ public class VisionCommand extends CommandBase {
 
     
     double width = m_vision.width.getDouble(-1.0);
-    /*int pos = -45 * (int)width + 6980;
+   // int pos = -45 * (int)width + 6980;
+    int pos = -45 * (int)width/2 + 7050;
     if(m_shooter.setPointToAngle(pos)){
+      //
       while(!m_Joystick.getRawButton(6)){
-        m_shooter.setLodingSpeed(-0.6);
-        m_shooter.setDeliveryspeed(-0.2);
+        time.delay(1.5);
+        m_shooter.setLodingSpeed(0.6);
+        m_shooter.setDeliveryspeed(-0.4);
         time.delay(0.023);
         time.start();
        
@@ -182,7 +191,7 @@ public class VisionCommand extends CommandBase {
     }else{
       System.out.println("Not setting angle :( ");
     }
-    */
+    
     System.out.println("WIDTH: " + width);
     m_shooter.setLodingSpeed(0.0);
     m_shooter.setDeliveryspeed(0.0);
@@ -198,17 +207,17 @@ public class VisionCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     //System.out.println("err" + (last_error - (Math.abs(m_vision.xCenter.getDouble(-1.0) - 128))));
-    if(m_Joystick.getRawButton(4)){
+   /* if(m_Joystick.getRawButton(4)){
       m_shooter.setShooterSpeed(0.72);
       return true;
     }
-    /*
-    if(m_Joystick.getRawButton(4) || (last_error - (Math.abs(m_vision.xCenter.getDouble(-1.0) - 128)) == 0.0 && Math.abs(m_vision.xCenter.getDouble(-1.0) - 128) < 20) && time.get() > 3){
+    */
+    if(m_Joystick.getRawButton(4) || (last_error - (Math.abs(m_vision.xCenter.getDouble(-1.0) - 256)) == 0.0 && Math.abs(m_vision.xCenter.getDouble(-1.0) - 256) < 20) && time.get() > 3.5){
       
-      m_shooter.setShooterSpeed();
+      m_shooter.setShooterSpeed(0.74);
       return true;
     }
-    last_error = Math.abs(m_vision.xCenter.getDouble(-1.0) - 128);*/
+    last_error = Math.abs(m_vision.xCenter.getDouble(-1.0) - 256);
     return false;
 
   }

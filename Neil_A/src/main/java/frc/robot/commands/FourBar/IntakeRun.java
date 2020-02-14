@@ -5,22 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Roulette;
+package frc.robot.commands.FourBar;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FourBar;
-import frc.robot.subsystems.Ruleta;
 
-public class RouletteClose extends CommandBase {
+public class IntakeRun extends CommandBase {
   /**
-   * Creates a new RuletaClose.
+   * Creates a new IntakeRun.
    */
-  Ruleta m_Ruleta;
-  
-  public RouletteClose(Ruleta R ) {
-    m_Ruleta = R;
-    addRequirements(R);
-  
+  FourBar m_FourBar;
+  XboxController m_xController;
+  public IntakeRun(XboxController xController,FourBar fourBar) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    m_FourBar = fourBar;
+    m_xController=xController;
+    addRequirements(m_FourBar);
   }
 
   // Called when the command is initially scheduled.
@@ -31,25 +32,20 @@ public class RouletteClose extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  
-    m_Ruleta.setRuletaspeed(-0.35);
+    m_FourBar.setIntakeSpeed(-0.5);
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Ruleta.setRuletaspeed(0.0);
+    m_FourBar.setIntakeSpeed(0.0);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(!m_Ruleta.getClose()){
-      return true;
-    }else{
-      return false;
-    }
-    
+    return false;
   }
 }

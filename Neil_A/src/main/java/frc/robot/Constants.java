@@ -53,6 +53,10 @@ public final class Constants {
         public static final int ButtonRB = 6;
         public static final int ButtonLeftSmall = 7;
         public static final int ButtonRightSmall = 8;
+        
+        public static final int ButtonLeftAxisButton = 9;
+        public static final int ButtonRightAxisButton = 10;
+        
         public static final int PovButtonUp = 0;
         public static final int PovButtonDown = 180;
         public static final int RawAxisYLeft = 1;

@@ -34,15 +34,12 @@ public class RouletteCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_Ruleta.getOpen()){
-      if(m_XboxController.getRawAxis(2)>0.2){
-        m_Ruleta.setWheelaspeed(1.0);
-      }else{
-        m_Ruleta.setWheelaspeed(0.0);
-      }
-}else{
-  m_Ruleta.setWheelaspeed(0.0);
-}
+    if(m_XboxController.getRawAxis(2)>0.5){
+      m_Ruleta.setWheelaspeed(0.5);
+    }else{
+      m_Ruleta.setWheelaspeed(0.0);
+    }
+
 
   }
 

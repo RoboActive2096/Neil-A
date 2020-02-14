@@ -39,7 +39,7 @@ public class FourBarClose extends CommandBase {
   @Override
   public void execute() {
 
-    m_FourBar.setFourbarSpeed(0.3);
+    m_FourBar.setFourbarSpeed(0.4);
   }
 
   // Called once the command ends or is interrupted.

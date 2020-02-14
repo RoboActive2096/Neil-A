@@ -22,27 +22,28 @@ public class Ruleta extends SubsystemBase {
    */
   VictorSPX Ruleta = new VictorSPX(Constants.RuletaPorts.Ruleta);
   VictorSPX wheel = new VictorSPX(Constants.RuletaPorts.wheel);
-  DigitalInput micrDigitalInputOpen = new DigitalInput(2);
-  DigitalInput micrDigitalInputClose = new DigitalInput(3);
+  DigitalInput max = new DigitalInput(2);
+  DigitalInput min = new DigitalInput(3);
   public Ruleta() {
 
   }
 
   public boolean getOpen(){
-    return micrDigitalInputOpen.get();
+    return max.get();
   }
   
   public boolean getClose(){
-    return micrDigitalInputClose.get();
+    return min.get();
   }
 
   public void setRuletaspeed(double speed){
-  Ruleta.set(ControlMode.PercentOutput, speed);
+    Ruleta.set(ControlMode.PercentOutput, speed);
+
   }
 
   public void setWheelaspeed(double speed){
     wheel.set(ControlMode.PercentOutput, speed);
-    }
+  }
 
   @Override
   public void periodic() {

@@ -29,8 +29,8 @@ public class Shooter extends SubsystemBase {
   ShooterPID shooterPIDClass = new ShooterPID(Shooter, 1.16, 0.000, 0.0005, 0.02, 0, 0.0);  
   TalonSRX Angle = new TalonSRX(Constants.ShootersPorts.Angle);
   VictorSPX Delivery = new VictorSPX(Constants.ShootersPorts.Delivery);
-  DigitalInput maxDigitalInput = new DigitalInput(1);
-  DigitalInput minDigitalInput = new DigitalInput(0);
+  DigitalInput maxDigitalInput = new DigitalInput(0);
+  DigitalInput minDigitalInput = new DigitalInput(1);
   Timer time;
   public Shooter() {
     Angle.configFactoryDefault();
@@ -54,7 +54,15 @@ public class Shooter extends SubsystemBase {
   }
   
   public void setAngelspeed(double speed){
+    if(speed>0 && !maxDigitalInput.get()){
+      speed=0.0;
+    }else if(speed<0 && !minDigitalInput.get()){
+      speed=0.0;
+      setEncoderAngleChanger(0);
+    }
+
     Angle.set(ControlMode.PercentOutput, speed);
+
   }
 
   public void setDeliveryspeed(double speed){
@@ -64,9 +72,11 @@ public class Shooter extends SubsystemBase {
   public double getEncoderAngleChanger(){
     return Angle.getSelectedSensorPosition();
   }
+
   public void setEncoderAngleChanger(int val){
     Angle.setSelectedSensorPosition(val);
   }
+
   public boolean setPointToAngle(int val){
     double speed = 0.25;
     boolean t = true;

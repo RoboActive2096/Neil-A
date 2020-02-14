@@ -7,6 +7,7 @@
 
 package frc.robot.commands.Shooter;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FourBar;
@@ -18,10 +19,11 @@ public class ShooterCommand extends CommandBase {
   XboxController m_xController;
   Shooter m_Shooter;
   FourBar m_FourBar;
-  public ShooterCommand(XboxController XC, Shooter SH, FourBar FB) {
+  Joystick m_Joystick;
+  public ShooterCommand(XboxController XC, Shooter SH,Joystick joystick) {
   m_xController = XC;
-  m_FourBar = FB;
   m_Shooter = SH;
+  m_Joystick = joystick;
   addRequirements(SH);
   }
 
@@ -35,7 +37,7 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void execute() {
     if(m_xController.getRawAxis(3)>0.2){
-     m_Shooter.setShooterSpeed(0.4);
+     m_Shooter.setShooterSpeed(0.6); //was 0.728
     }else{
       m_Shooter.stop();
     }
@@ -43,24 +45,22 @@ public class ShooterCommand extends CommandBase {
     if(m_xController.getRawButton(2)){
       m_Shooter.setLodingSpeed(0.9);
       m_Shooter.setDeliveryspeed(-0.35);
-      m_FourBar.setIntakeSpeed(-0.5);
     }else{
       m_Shooter.setLodingSpeed(0.0);
       m_Shooter.setDeliveryspeed(0.0);
-      m_FourBar.setIntakeSpeed(0.0);
     }
 
-
     if(m_xController.getRawAxis(1)<-0.2){
-        //pressed 
         m_Shooter.setAngelspeed(0.35);
     }else if(m_xController.getRawAxis(1)>0.2){
       m_Shooter.setAngelspeed(-0.35);
-     
-      }else{
+    }else{
         m_Shooter.setAngelspeed(0.0);
-      }
+    }
    
+    if(m_Joystick.getRawButton(7)){
+      m_Shooter.setEncoderAngleChanger(0);
+    }
 
   }
   // Called once the command ends or is interrupted.

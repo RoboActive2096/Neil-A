@@ -34,14 +34,13 @@ public class FourBarOpen extends CommandBase {
     time.reset();
     time.start();
     m_FourBar.setIntakeSpeed(-0.8);
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    m_FourBar.setFourbarSpeed(-0.3);
+    m_FourBar.setFourbarSpeed(-0.5);
   }
 
   // Called once the command ends or is interrupted.

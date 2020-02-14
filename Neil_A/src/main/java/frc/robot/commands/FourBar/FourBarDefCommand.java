@@ -5,51 +5,50 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Roulette;
+package frc.robot.commands.FourBar;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.FourBar;
-import frc.robot.subsystems.Ruleta;
 
-public class RouletteClose extends CommandBase {
+public class FourBarDefCommand extends CommandBase {
   /**
-   * Creates a new RuletaClose.
+   * Creates a new FourBarDefCommand.
    */
-  Ruleta m_Ruleta;
-  
-  public RouletteClose(Ruleta R ) {
-    m_Ruleta = R;
-    addRequirements(R);
-  
+  FourBar m_fourbar;
+  XboxController m_xController;
+  public FourBarDefCommand(FourBar fourBar,XboxController xController) {
+    m_fourbar=fourBar;
+    m_xController=xController;
+    addRequirements(fourBar);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  
-    m_Ruleta.setRuletaspeed(-0.35);
-
+    if(m_xController.getRawButton(Constants.XboxButtons.ButtonB)){
+      m_fourbar.setIntakeSpeed(0.5);
+    }else{
+      m_fourbar.setIntakeSpeed(0.0);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Ruleta.setRuletaspeed(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(!m_Ruleta.getClose()){
-      return true;
-    }else{
-      return false;
-    }
-    
+    return false;
   }
 }

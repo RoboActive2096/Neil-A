@@ -13,14 +13,18 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.DriveBase.*;
-import frc.robot.commands.FourBar.FourBarClose;
-import frc.robot.commands.FourBar.FourBarOpen;
+import frc.robot.commands.FourBar.*;
+import frc.robot.commands.VisionAutoAll;
+import frc.robot.commands.logGlobal;
+import frc.robot.commands.turnOffFlash;
+import frc.robot.commands.turnOnFlash;
 import frc.robot.commands.Climb.*;
 import frc.robot.commands.Roulette.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
+import frc.robot.subsystems.RelayTest;
 import frc.robot.subsystems.Ruleta;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
@@ -39,9 +43,12 @@ public class RobotContainer {
   Climb m_Climb;
   FourBar m_FourBar;
   Ruleta m_Ruleta ;
+  RelayTest rt;
   XboxController m_XController;
   Joystick m_Joystick;
   Vision m_vision;
+  int GlobalFlashState;
+  ;
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -50,20 +57,19 @@ public class RobotContainer {
     m_XController = new XboxController(1);
     m_Joystick = new Joystick(0);
     m_FourBar = new FourBar();
-
     m_Shooter = new Shooter();
     m_Climb = new Climb();
     m_Ruleta = new Ruleta();
-    
+    rt = new RelayTest();
     m_vision = new Vision(m_DriveBase);
     m_DriveBase = new DriveBase();
+    GlobalFlashState = 0;
 
     
-    //m_Shooter.setDefaultCommand(new ShooterCommand(m_XController, m_Shooter, m_FourBar));
+    m_Shooter.setDefaultCommand(new ShooterCommand(m_XController, m_Shooter,m_Joystick));
     m_Climb.setDefaultCommand(new ClimbCommand(m_XController, m_Climb));
     m_Ruleta.setDefaultCommand(new RouletteCommand(m_XController, m_Ruleta, m_FourBar));
     m_DriveBase.setDefaultCommand(new ArcadeDrive(m_DriveBase, m_Joystick));
-    
     // Configure the button bindings
     configureButtonBindings();
 
@@ -78,7 +84,11 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_XController, m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_XController,m_FourBar));
-    new JoystickButton(m_Joystick, 1).whenPressed(new VisionCommand(m_vision, m_Joystick, m_DriveBase, m_Shooter,m_FourBar, m_XController));
+    new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
+    //new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftAxisButton).whenPressed(new turnOnFlash(rt,GlobalFlashState));
+    //new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightAxisButton).whenPressed(new turnOffFlash(rt,GlobalFlashState));
+
+    new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
     new JoystickButton(m_XController, 8).whenPressed(new RouletteOpen(m_Ruleta));
     new JoystickButton(m_XController, 7).whenPressed(new RouletteClose(m_Ruleta));
   }

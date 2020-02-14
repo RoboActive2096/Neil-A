@@ -18,35 +18,39 @@ public class RouletteOpen extends CommandBase {
 
   Ruleta m_Ruleta;
   public RouletteOpen(Ruleta RU) {
-  m_Ruleta = RU;
-  addRequirements(RU);
+    m_Ruleta = RU;
+    addRequirements(RU);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Ruleta.setRuletaspeed(0.2);
-    
+    System.out.println("0.4");
+
+    m_Ruleta.setRuletaspeed(0.4);
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-   m_Ruleta.setRuletaspeed(0.07);
+   m_Ruleta.setRuletaspeed(0.1);
+   System.out.println("end");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(1==1){
-      return false;
-    }else{
+    if(!m_Ruleta.getOpen()){
+      System.out.println("done");
       return true;
     }
+    return false;
   }
 }
