@@ -181,7 +181,7 @@ public class VisionCommand extends CommandBase {
       //
       while(!m_Joystick.getRawButton(6)){
         time.delay(1.5);
-        m_shooter.setLodingSpeed(0.6);
+        m_shooter.setLoadingSpeed(0.6);
         m_shooter.setDeliveryspeed(-0.4);
         time.delay(0.023);
         time.start();
@@ -193,7 +193,7 @@ public class VisionCommand extends CommandBase {
     }
     
     System.out.println("WIDTH: " + width);
-    m_shooter.setLodingSpeed(0.0);
+    m_shooter.setLoadingSpeed(0.0);
     m_shooter.setDeliveryspeed(0.0);
     time.stop();
     time.reset();

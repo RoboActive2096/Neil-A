@@ -25,7 +25,7 @@ public class Shooter extends SubsystemBase {
    * Creates a new Shooter.
    */
   TalonFX Shooter = new TalonFX(Constants.ShootersPorts.Shooter);
-  VictorSPX Loding = new VictorSPX(Constants.ShootersPorts.Loading);
+  VictorSPX Loading = new VictorSPX(Constants.ShootersPorts.Loading);
   ShooterPID shooterPIDClass = new ShooterPID(Shooter, 1.16, 0.000, 0.0005, 0.02, 0, 0.0);  
   TalonSRX Angle = new TalonSRX(Constants.ShootersPorts.Angle);
   VictorSPX Delivery = new VictorSPX(Constants.ShootersPorts.Delivery);
@@ -49,8 +49,8 @@ public class Shooter extends SubsystemBase {
     shooterPIDClass.stopMotor();
   }
 
-  public void setLodingSpeed(double speed){
-    Loding.set(ControlMode.PercentOutput, speed);
+  public void setLoadingSpeed(double speed){
+    Loading.set(ControlMode.PercentOutput, speed);
   }
   
   public void setAngelspeed(double speed){
