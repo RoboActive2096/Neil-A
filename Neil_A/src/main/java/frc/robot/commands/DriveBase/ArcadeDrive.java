@@ -6,6 +6,8 @@
 package frc.robot.commands.DriveBase;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveBase;
 
@@ -17,7 +19,7 @@ public class ArcadeDrive extends CommandBase {
   Joystick m_joystick;
   DriveBase m_dBase;
 
-  public ArcadeDrive(DriveBase driveBase,Joystick joystick)
+  public ArcadeDrive(final DriveBase driveBase,final Joystick joystick)
   {
     m_joystick = joystick;
     m_dBase = driveBase;
@@ -35,74 +37,40 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void execute()
   {
-    double x = -getX() * 0.9;
-    double y = getY() * 0.9;
+    SmartDashboard.putNumber("left side encoder", m_dBase.getEncoderAvgLeftSide());
+    
+    SmartDashboard.putNumber("right side encoder", m_dBase.getEncoderAvgRightSide());
+    SmartDashboard.putNumber("avg two side encoder", m_dBase.AvgTwoSidesEncoder());
+    SmartDashboard.putNumber("Gyro Angle", m_dBase.getGyroAngle());
+    if(m_joystick.getRawButton(9)){
+      m_dBase.resetEncoder();
+      m_dBase.resetGyro();
+      m_dBase.calirationGyro();
+    }
+    final double x = -getX() * 0.9;
+    final double y = getY() * 0.9;
     driveTry(x, y);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) 
+  public void end(final boolean interrupted) 
   {
 
   }
 
-  public void driveTry(double x,double y){
-    double _x = tryDrive(x);
-    double _y = tryDrive(y);
-    double left = _x+_y;
-    double right = _y-_x;
+  public void driveTry(final double x,final double y){
+    final double _x = tryDrive(x);
+    final double _y = tryDrive(y);
+    final double left = _x+_y;
+    final double right = _y-_x;
     m_dBase.setLeft(left);
     m_dBase.setRight(right);
   }
-  private double tryDrive(double x){
-    double f = 1.5,a=-0.45,b=-0.28,c=-0.5,m=-4.3;
-    double calc=((Math.pow(x,5)+a*x+b*Math.pow(x, 9)+c*Math.pow(x, 3)+m*Math.pow(x, 5))/(a+b+c+m))*f;
+  private double tryDrive(final double x){
+    final double f = 1.5,a=-0.45,b=-0.28,c=-0.5,m=-4.3;
+    final double calc=((Math.pow(x,5)+a*x+b*Math.pow(x, 9)+c*Math.pow(x, 3)+m*Math.pow(x, 5))/(a+b+c+m))*f;
     return calc;
-  }
-
-  private void sensitiveXnonY(double x, double y)
-  {
-    double left = y+(x*0.3);
-    double right = y-(x*0.3);
-    m_dBase.setRight(right);
-    m_dBase.setLeft(left);
-  }
-
-  private void sensitiveYnonX(double x, double y)
-  {
-    double left = 0.3 * y + x;
-    double right = 0.3 * y - x;
-    m_dBase.setRight(right);
-    m_dBase.setLeft(left);
-  }
-
-  private void regular(double x, double y)
-  {
-    double left = y + x;
-    double right = y - x;
-    m_dBase.setRight(right);
-    m_dBase.setLeft(left);
-  }
-
-  private void specialOne(double x, double y)
-  {
-    double left = 0.0;
-    double right = 0.0;
-
-    if(x == 0.0)
-    {
-      left = y + x;
-      right = y - x;
-    }
-    else
-    {
-      left = y + Math.pow(x, 3) * 0.5;
-      right = y - Math.pow(x, 3) * 0.5;
-    }
-
-    m_dBase.setRight(right);
-    m_dBase.setLeft(left);
   }
 
   private double getY()

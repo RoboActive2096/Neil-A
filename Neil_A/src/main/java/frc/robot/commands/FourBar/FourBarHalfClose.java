@@ -19,8 +19,7 @@ public class FourBarHalfClose extends CommandBase {
   XboxController m_XboxController;
   FourBar m_FourBar;
   Timer time;
-  public FourBarHalfClose(XboxController xController,FourBar fourBar) {
-    m_XboxController=xController;
+  public FourBarHalfClose(FourBar fourBar) {
     m_FourBar=fourBar;
     time = new Timer();
     addRequirements(fourBar);
@@ -45,6 +44,7 @@ public class FourBarHalfClose extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_FourBar.setIntakeSpeed(0.0);
     m_FourBar.setFourbarSpeed(0.0);
   }
 

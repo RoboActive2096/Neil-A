@@ -8,7 +8,6 @@
 package frc.robot.commands.FourBar;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FourBar;
 
@@ -16,11 +15,9 @@ public class FourBarClose extends CommandBase {
   /**
    * Creates a new FourBarOpen.
    */
-  XboxController m_XboxController;
   FourBar m_FourBar;
   Timer time;
-  public FourBarClose(XboxController xController,FourBar fourBar) {
-    m_XboxController=xController;
+  public FourBarClose(FourBar fourBar) {
     m_FourBar=fourBar;
     time = new Timer();
     addRequirements(fourBar);
@@ -30,6 +27,7 @@ public class FourBarClose extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_FourBar.setIntakeSpeed(-0.8);
     time.stop();
     time.reset();
     time.start();
@@ -46,6 +44,7 @@ public class FourBarClose extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_FourBar.setFourbarSpeed(0.0);
+    time.delay(0.2);
     m_FourBar.setIntakeSpeed(0.0);
 
   }
@@ -53,7 +52,7 @@ public class FourBarClose extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>0.5){
+    if(time.get()>0.9){
       return true;
     }else{
       return false;

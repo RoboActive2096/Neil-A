@@ -10,14 +10,24 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.DriveBase.*;
 import frc.robot.commands.FourBar.*;
+import frc.robot.commands.GyroTurn;
+import frc.robot.commands.ShooterForSecond;
 import frc.robot.commands.VisionAutoAll;
 import frc.robot.commands.logGlobal;
 import frc.robot.commands.turnOffFlash;
 import frc.robot.commands.turnOnFlash;
+import frc.robot.commands.Autonomous.Auto1;
+import frc.robot.commands.Autonomous.Auto2;
+import frc.robot.commands.Autonomous.Auto3;
+import frc.robot.commands.Autonomous.Auto4;
+import frc.robot.commands.Autonomous.parallelShooterWithFourBar;
 import frc.robot.commands.Climb.*;
 import frc.robot.commands.Roulette.*;
 import frc.robot.commands.Shooter.*;
@@ -48,7 +58,9 @@ public class RobotContainer {
   Joystick m_Joystick;
   Vision m_vision;
   int GlobalFlashState;
-  ;
+  
+
+  
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -57,7 +69,7 @@ public class RobotContainer {
     m_XController = new XboxController(1);
     m_Joystick = new Joystick(0);
     m_FourBar = new FourBar();
-    m_Shooter = new Shooter(m_XController);
+    m_Shooter = new Shooter();
     m_Climb = new Climb();
     m_Roulette = new Roulette();
     rt = new RelayTest();
@@ -82,14 +94,15 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_XController, m_FourBar));
-    new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_XController,m_FourBar));
-    new POVButton(m_XController, Constants.XboxButtons.PovButtonRight).whenPressed(new FourBarHalfOpen(m_XController,m_FourBar));
-    new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_XController,m_FourBar));
+    new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_FourBar));
+    new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_FourBar));
+    new POVButton(m_XController, Constants.XboxButtons.PovButtonRight).whenPressed(new FourBarHalfOpen(m_FourBar));
+    new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_FourBar));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
     //new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftAxisButton).whenPressed(new turnOnFlash(rt,GlobalFlashState));
     //new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightAxisButton).whenPressed(new turnOffFlash(rt,GlobalFlashState));
-
+    new JoystickButton(m_Joystick, 2).whenPressed(new Auto1(m_Shooter, m_DriveBase));
+    new JoystickButton(m_Joystick, 8).whenPressed(new DriveForDistance(m_DriveBase,4));
     new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
     new JoystickButton(m_XController, 8).whenPressed(new RouletteOpen(m_Roulette));
     new JoystickButton(m_XController, 7).whenPressed(new RouletteClose(m_Roulette));
@@ -101,10 +114,11 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  /*
+  
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    
+    return (new Auto4(m_Shooter, m_DriveBase,m_FourBar));
   }
-  */
+  
 }

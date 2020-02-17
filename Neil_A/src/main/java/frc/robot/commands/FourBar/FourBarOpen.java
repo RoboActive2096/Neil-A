@@ -16,11 +16,10 @@ public class FourBarOpen extends CommandBase {
   /**
    * Creates a new FourBarOpen.
    */
-  XboxController m_XboxController;
   FourBar m_FourBar;
   Timer time;
-  public FourBarOpen(XboxController xController,FourBar fourBar) {
-    m_XboxController=xController;
+  public FourBarOpen(FourBar fourBar) {
+
     m_FourBar=fourBar;
     time = new Timer();
     addRequirements(fourBar);
@@ -40,7 +39,7 @@ public class FourBarOpen extends CommandBase {
   @Override
   public void execute() {
 
-    m_FourBar.setFourbarSpeed(-0.5);
+    m_FourBar.setFourbarSpeed(-0.6);
   }
 
   // Called once the command ends or is interrupted.

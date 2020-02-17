@@ -7,20 +7,19 @@
 
 package frc.robot.commands.FourBar;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.FourBar;
 
-public class FourBarDefCommand extends CommandBase {
+public class FourBarCloseForAuto extends CommandBase {
   /**
-   * Creates a new FourBarDefCommand.
+   * Creates a new FourBarCloseForAuto.
    */
-  FourBar m_fourbar;
-  XboxController m_xController;
-  public FourBarDefCommand(FourBar fourBar,XboxController xController) {
-    m_fourbar=fourBar;
-    m_xController=xController;
+  FourBar m_FourBar;
+  Timer time;
+  public FourBarCloseForAuto(final FourBar fourBar) {
+    m_FourBar=fourBar;
+    time = new Timer();
     addRequirements(fourBar);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -28,29 +27,34 @@ public class FourBarDefCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    m_FourBar.setIntakeSpeed(-0.8);
+    time.stop();
+    time.reset();
+    time.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*
-    if(m_xController.getRawButton(Constants.XboxButtons.ButtonB)){
-      m_fourbar.setIntakeSpeed(0.5);
-    }else{
-      m_fourbar.setIntakeSpeed(0.0);
-    }
-    */
+
+    m_FourBar.setFourbarSpeed(0.6);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
+    m_FourBar.setFourbarSpeed(0.0);
+    m_FourBar.setIntakeSpeed(0.0);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(time.get()>0.9){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

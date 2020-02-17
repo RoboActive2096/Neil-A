@@ -9,6 +9,7 @@ package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
@@ -36,10 +37,13 @@ public class ShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double angle = m_Shooter.getEncoderAngleChanger();
+    SmartDashboard.putNumber("testangle", angle);
+
     if(m_xController.getRawAxis(3)>0.2){
      m_Shooter.setShooterSpeed(0.728);//0.728 
     }else{
-      m_Shooter.stop();
+      m_Shooter.setShooterSpeed(0.0);
     }
 
     if(m_xController.getRawButton(2)){

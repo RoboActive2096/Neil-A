@@ -5,52 +5,63 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.FourBar;
+package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.FourBar;
+import frc.robot.subsystems.Shooter;
 
-public class FourBarDefCommand extends CommandBase {
+public class ShooterForSecond extends CommandBase {
   /**
-   * Creates a new FourBarDefCommand.
+   * Creates a new ShooterForSecond.
    */
-  FourBar m_fourbar;
-  XboxController m_xController;
-  public FourBarDefCommand(FourBar fourBar,XboxController xController) {
-    m_fourbar=fourBar;
-    m_xController=xController;
-    addRequirements(fourBar);
-    // Use addRequirements() here to declare subsystem dependencies.
+  Timer time;
+  double targetTime;
+  Shooter m_Shooter;
+  double speed;
+  public ShooterForSecond(Shooter shooter, double t,double spd){
+    time = new Timer();
+    m_Shooter = shooter;
+    targetTime = t;
+    speed = spd;
+  addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    time.stop();
+    time.reset();
+    time.start();  
     
+    m_Shooter.setDeliveryspeed(0);
+    m_Shooter.setLoadingSpeed(0);
+    m_Shooter.setShooterSpeed(speed);
+    time.delay(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*
-    if(m_xController.getRawButton(Constants.XboxButtons.ButtonB)){
-      m_fourbar.setIntakeSpeed(0.5);
-    }else{
-      m_fourbar.setIntakeSpeed(0.0);
-    }
-    */
+    m_Shooter.setLoadingSpeed(0.9);
+    m_Shooter.setDeliveryspeed(-0.6);
+    m_Shooter.setShooterSpeed(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_Shooter.setDeliveryspeed(0.0);
+    m_Shooter.setLoadingSpeed(0.0);
+    m_Shooter.setShooterSpeed(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(time.get()>targetTime){
+      return true;
+    }
     return false;
   }
 }

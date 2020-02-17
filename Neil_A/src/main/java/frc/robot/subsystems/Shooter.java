@@ -34,10 +34,8 @@ public class Shooter extends SubsystemBase {
   DigitalInput maxDigitalInput = new DigitalInput(0);
   DigitalInput minDigitalInput = new DigitalInput(1);
   Timer time;
-  XboxController m_XController;
 
-  public Shooter(XboxController xController) {
-    m_XController = xController;
+  public Shooter() {
     Angle.configFactoryDefault();
     Angle.setNeutralMode(NeutralMode.Brake);
     time = new Timer();
@@ -62,17 +60,11 @@ public class Shooter extends SubsystemBase {
     if(speed>0 && !maxDigitalInput.get()){
       speed=0.0;
 
-      m_XController.setRumble(RumbleType.kLeftRumble, 1.0);
-      m_XController.setRumble(RumbleType.kRightRumble, 1.0);
     }else if(speed<0 && !minDigitalInput.get()){
       speed=0.0;
       setEncoderAngleChanger(0);
 
-      m_XController.setRumble(RumbleType.kLeftRumble, 1.0);
-      m_XController.setRumble(RumbleType.kRightRumble, 1.0);
     }
-    m_XController.setRumble(RumbleType.kLeftRumble, 0.0);
-    m_XController.setRumble(RumbleType.kRightRumble, 0.0);
 
     Angle.set(ControlMode.PercentOutput, speed);
 

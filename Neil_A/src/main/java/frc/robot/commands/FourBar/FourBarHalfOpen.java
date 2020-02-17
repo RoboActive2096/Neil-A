@@ -16,11 +16,9 @@ public class FourBarHalfOpen extends CommandBase {
   /**
    * Creates a new FourBarOpen.
    */
-  XboxController m_XboxController;
   FourBar m_FourBar;
   Timer time;
-  public FourBarHalfOpen(XboxController xController,FourBar fourBar) {
-    m_XboxController=xController;
+  public FourBarHalfOpen(FourBar fourBar) {
     m_FourBar=fourBar;
     time = new Timer();
     addRequirements(fourBar);
@@ -51,7 +49,7 @@ public class FourBarHalfOpen extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>0.25){
+    if(time.get()>0.3){
       return true;
     }else{
       return false;

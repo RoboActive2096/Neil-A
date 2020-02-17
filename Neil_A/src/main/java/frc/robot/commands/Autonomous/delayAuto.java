@@ -5,42 +5,35 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.FourBar;
+package frc.robot.commands.Autonomous;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.FourBar;
 
-public class FourBarDefCommand extends CommandBase {
+public class delayAuto extends CommandBase {
   /**
-   * Creates a new FourBarDefCommand.
+   * Creates a new delayAuto.
    */
-  FourBar m_fourbar;
-  XboxController m_xController;
-  public FourBarDefCommand(FourBar fourBar,XboxController xController) {
-    m_fourbar=fourBar;
-    m_xController=xController;
-    addRequirements(fourBar);
+  Timer time;
+  double timeToDelay;
+  public delayAuto(double t) {
     // Use addRequirements() here to declare subsystem dependencies.
+    timeToDelay = t;
+    time = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    time.stop();
+    time.reset();
+    time.delay(timeToDelay);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*
-    if(m_xController.getRawButton(Constants.XboxButtons.ButtonB)){
-      m_fourbar.setIntakeSpeed(0.5);
-    }else{
-      m_fourbar.setIntakeSpeed(0.0);
-    }
-    */
   }
 
   // Called once the command ends or is interrupted.
@@ -51,6 +44,6 @@ public class FourBarDefCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

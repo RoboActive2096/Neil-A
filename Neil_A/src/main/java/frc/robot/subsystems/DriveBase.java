@@ -9,7 +9,11 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -25,10 +29,26 @@ public class DriveBase extends SubsystemBase {
   double joystickDeadZone = 0.15;
   Joystick m_Joystick;
 
+  Gyro gyro;
+
   public DriveBase() 
   {
-    
+    gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);   
   }
+
+  public void calirationGyro(){
+    gyro.calibrate();
+  }
+
+
+  public double getGyroAngle(){
+    return this.gyro.getAngle();
+  }
+
+  public void resetGyro(){
+    this.gyro.reset();
+  }
+
 
   public void setRight(double speed)
   {
@@ -48,6 +68,44 @@ public class DriveBase extends SubsystemBase {
   public void driveFuncOne()
   {
     
+  }
+  public double getEncoderAvgRightSide(){
+    int sum = Math.abs(RightOne.getSelectedSensorPosition() + RightTwo.getSelectedSensorPosition() + RightThree.getSelectedSensorPosition());
+    double avg = sum/3;
+    SmartDashboard.putNumber("Right Encoder", avg);
+    //System.out.println("the right side:"+avg);
+    return avg;
+  }
+
+  public double getEncoderAvgLeftSide(){
+    int sum = Math.abs(LeftOne.getSelectedSensorPosition() + LeftTwo.getSelectedSensorPosition() + LeftThree.getSelectedSensorPosition());
+    double avg = sum/3;
+    SmartDashboard.putNumber("left Encoder", avg);
+    //System.out.println("the left side is:"+avg);
+    return avg;
+  }
+
+  public double AvgTwoSidesEncoder(){
+    double avg = (getEncoderAvgLeftSide()+getEncoderAvgRightSide())/2.0;
+    //System.out.println("avg of two sides is:" + avg);
+    return avg;
+  }
+
+  public void ResetEncoderRight(){
+    RightOne.setSelectedSensorPosition(0);
+    RightTwo.setSelectedSensorPosition(0);
+    RightThree.setSelectedSensorPosition(0);
+  }
+
+  public void ResetEncoderLeft(){
+    LeftOne.setSelectedSensorPosition(0);
+    LeftTwo.setSelectedSensorPosition(0);
+    LeftThree.setSelectedSensorPosition(0);
+  }
+
+  public void resetEncoder(){
+    ResetEncoderLeft();
+    ResetEncoderRight();
   }
 
 

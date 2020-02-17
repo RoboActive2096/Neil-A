@@ -52,7 +52,7 @@ class ShooterPID{
 		talon.configNominalOutputReverse(0, kTimeoutMs);
 		talon.configPeakOutputForward(1, kTimeoutMs);
         talon.configPeakOutputReverse(-1, kTimeoutMs);
-        talon.setNeutralMode(NeutralMode.Brake);
+  
 
 		/* Config the Velocity closed loop gains in slot0 */
 		talon.config_kF(kSlotIdx, kF, kTimeoutMs);
