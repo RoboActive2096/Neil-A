@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.DriveBase.*;
 import frc.robot.commands.FourBar.*;
+import frc.robot.commands.FourBarOpenAndClose;
 import frc.robot.commands.GyroTurn;
 import frc.robot.commands.ShooterForSecond;
 import frc.robot.commands.VisionAutoAll;
@@ -96,7 +97,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_FourBar));
-    new POVButton(m_XController, Constants.XboxButtons.PovButtonRight).whenPressed(new FourBarHalfOpen(m_FourBar));
+    new POVButton(m_XController, Constants.XboxButtons.PovButtonRight).whileHeld(new FourBarOpenAndClose(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_FourBar));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
     //new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftAxisButton).whenPressed(new turnOnFlash(rt,GlobalFlashState));

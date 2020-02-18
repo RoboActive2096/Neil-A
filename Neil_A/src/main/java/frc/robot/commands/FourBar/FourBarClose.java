@@ -27,7 +27,7 @@ public class FourBarClose extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_FourBar.setIntakeSpeed(-0.8);
+    m_FourBar.setIntakeSpeed(-0.4);
     time.stop();
     time.reset();
     time.start();

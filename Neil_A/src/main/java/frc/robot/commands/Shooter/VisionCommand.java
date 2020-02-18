@@ -42,9 +42,9 @@ public class VisionCommand extends CommandBase {
   private final double I = 0.00045;//0.000008;
   private final double D = 0.0073;//0.00007*47*0.015; //P*0.01
 */
-  private final double P = 0.633;//0.00007*47; //0.00007*40
-  private final double I = 0.0;//0.000008;
-  private final double D = 0.0018;//0.00007*47*0.015; //P*0.01
+  private final double P = 0.45;//0.00007*47; //0.00007*40; //0.633
+  private final double I = 0.000000;//0.000008;
+  private final double D = 0.0015;//0.00007*47*0.015; //P*0.01; //0.0015;
   /*
     private final double P = 0.15;//0.00007*47; //0.00007*40
     private final double I = 0.0;//0.000008;
@@ -177,7 +177,7 @@ public class VisionCommand extends CommandBase {
     double width = m_vision.width.getDouble(-1.0);
    // int pos = -45 * (int)width + 6980;
     int pos = -45 * (int)width/2 + 7050;
-    if(m_shooter.setPointToAngle(pos)){
+   /* if(m_shooter.setPointToAngle(pos)){
       //
       while(!m_Joystick.getRawButton(6)){
         time.delay(1.5);
@@ -191,7 +191,15 @@ public class VisionCommand extends CommandBase {
     }else{
       System.out.println("Not setting angle :( ");
     }
-    
+    */
+    while(!m_Joystick.getRawButton(6)){
+      time.delay(0.9);
+      m_shooter.setLoadingSpeed(0.6);
+      m_shooter.setDeliveryspeed(-0.4);
+      time.delay(0.023);
+      time.start();
+     
+    }
     System.out.println("WIDTH: " + width);
     m_shooter.setLoadingSpeed(0.0);
     m_shooter.setDeliveryspeed(0.0);
@@ -212,7 +220,7 @@ public class VisionCommand extends CommandBase {
       return true;
     }
     */
-    if(m_Joystick.getRawButton(4) || (last_error - (Math.abs(m_vision.xCenter.getDouble(-1.0) - 256)) == 0.0 && Math.abs(m_vision.xCenter.getDouble(-1.0) - 256) < 20) && time.get() > 3.5){
+    if(m_Joystick.getRawButton(4) || (last_error - (Math.abs(m_vision.xCenter.getDouble(-1.0) - 256)) == 0.0 && Math.abs(m_vision.xCenter.getDouble(-1.0) - 256) < 20) && time.get() > 2.5){
       
       m_shooter.setShooterSpeed(0.74);
       return true;

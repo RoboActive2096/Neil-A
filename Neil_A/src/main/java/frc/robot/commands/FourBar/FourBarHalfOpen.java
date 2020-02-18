@@ -37,7 +37,7 @@ public class FourBarHalfOpen extends CommandBase {
   @Override
   public void execute() {
 
-    m_FourBar.setFourbarSpeed(-0.5);
+    m_FourBar.setFourbarSpeed(-0.55);
   }
 
   // Called once the command ends or is interrupted.
@@ -49,7 +49,7 @@ public class FourBarHalfOpen extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>0.3){
+    if(time.get()>0.28){
       return true;
     }else{
       return false;
