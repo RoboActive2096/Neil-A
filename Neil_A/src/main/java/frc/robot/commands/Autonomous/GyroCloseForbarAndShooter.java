@@ -7,27 +7,24 @@
 
 package frc.robot.commands.Autonomous;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.GyroTurn;
-import frc.robot.commands.ShooterForSecond;
-import frc.robot.commands.DriveBase.DriveForDistance;
-import frc.robot.commands.FourBar.FourBarClose;
-import frc.robot.commands.FourBar.FourBarOpen;
-import frc.robot.commands.FourBar.FourBarWheelsOff;
-import frc.robot.commands.FourBar.FourBarWheelsOn;
+import frc.robot.commands.FourBar.FourBarCloseForAuto;
+import frc.robot.commands.Shooter.OnlyShooter;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
+
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class Auto4 extends SequentialCommandGroup {
+public class GyroCloseForbarAndShooter extends ParallelCommandGroup {
   /**
-   * Creates a new Auto4.
+   * Creates a new GyroCloseForbarAndShooter.
    */
-  public Auto4(Shooter sh,DriveBase db,FourBar fb) {
+  public GyroCloseForbarAndShooter(DriveBase m_Drivebase, FourBar m_fourbar, Shooter m_shooter, double angle, boolean right) {
     // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
-    super(new GyroTurn(db, 18, false),new ShooterForSecond(sh,2,0.728),new GyroTurn(db, 158, false),new openfourBarWhileDriving(db, 4, fb),new GyroCloseForbarAndShooter(db, fb, sh, 158, true) ,new FourBarWheelsOn(fb),new parallelShooterWithFourBar(sh,fb, 4),new FourBarWheelsOff(fb),new delayAuto(15));
+    // super(new FooCommand(), new BarCommand());super();
+    super(new GyroTurn(m_Drivebase, angle, right), new FourBarCloseForAuto(m_fourbar), new OnlyShooter(m_shooter));
   }
 }
