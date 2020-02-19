@@ -25,6 +25,6 @@ public class parallelShooterWithFourBar extends ParallelCommandGroup {
   public parallelShooterWithFourBar(Shooter sh,FourBar fb,double seconds) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    super(new ShooterForSecond(sh, seconds,0.71),new openCloseFourBar(fb));
+    super(new ShooterForSecond(sh, seconds,0.71));
   }
 }

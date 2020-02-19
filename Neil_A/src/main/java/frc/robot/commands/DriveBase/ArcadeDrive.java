@@ -38,7 +38,6 @@ public class ArcadeDrive extends CommandBase {
   public void execute()
   {
     SmartDashboard.putNumber("left side encoder", m_dBase.getEncoderAvgLeftSide());
-    
     SmartDashboard.putNumber("right side encoder", m_dBase.getEncoderAvgRightSide());
     SmartDashboard.putNumber("avg two side encoder", m_dBase.AvgTwoSidesEncoder());
     SmartDashboard.putNumber("Gyro Angle", m_dBase.getGyroAngle());

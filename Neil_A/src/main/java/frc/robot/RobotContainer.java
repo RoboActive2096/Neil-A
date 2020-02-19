@@ -7,9 +7,17 @@
 
 package frc.robot;
 
+import java.util.Map;
+
+import javax.lang.model.util.ElementScanner6;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -60,7 +68,11 @@ public class RobotContainer {
   Vision m_vision;
   int GlobalFlashState;
   
-
+  NetworkTableEntry auto1;
+  NetworkTableEntry auto2;
+  NetworkTableEntry auto3;
+  NetworkTableEntry auto4;
+  
   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -77,7 +89,6 @@ public class RobotContainer {
     m_vision = new Vision(m_DriveBase);
     m_DriveBase = new DriveBase();
     GlobalFlashState = 0;
-
     
     m_Shooter.setDefaultCommand(new ShooterCommand(m_XController, m_Shooter,m_Joystick));
     m_Climb.setDefaultCommand(new ClimbCommand(m_XController, m_Climb));
@@ -100,8 +111,6 @@ public class RobotContainer {
     new POVButton(m_XController, Constants.XboxButtons.PovButtonRight).whileHeld(new FourBarOpenAndClose(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_FourBar));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
-    //new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftAxisButton).whenPressed(new turnOnFlash(rt,GlobalFlashState));
-    //new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightAxisButton).whenPressed(new turnOffFlash(rt,GlobalFlashState));
     new JoystickButton(m_Joystick, 2).whenPressed(new Auto1(m_Shooter, m_DriveBase));
     new JoystickButton(m_Joystick, 8).whenPressed(new DriveForDistance(m_DriveBase,4));
     new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
@@ -118,8 +127,51 @@ public class RobotContainer {
   
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    
-    return (new Auto4(m_Shooter, m_DriveBase,m_FourBar));
+    auto1 = Shuffleboard.getTab("AutoChoose")
+        .add("Auto 1 - Toggle", false)
+        .withWidget("Toggle Button")
+        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
+        .getEntry();
+    auto2 = Shuffleboard.getTab("AutoChoose")
+        .add("Auto 2 - Toggle", false)
+        .withWidget("Toggle Button")
+        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
+        .getEntry(); 
+    auto3 = Shuffleboard.getTab("AutoChoose")
+        .add("Auto 3 - Toggle", false)
+        .withWidget("Toggle Button")
+        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
+        .getEntry(); 
+    auto4 = Shuffleboard.getTab("AutoChoose")
+        .add("Auto 4 - Toggle", false)
+        .withWidget("Toggle Button")
+        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
+        .getEntry(); 
+
+
+    /*if(auto1)
+    {
+      return (new Auto1(m_Shooter, m_DriveBase));
+    }
+    else if(auto2)
+    {
+      return (new Auto2(m_Shooter, m_DriveBase,m_FourBar));
+    }
+    else if(auto3)
+    {
+      return (new Auto3(m_Shooter, m_DriveBase,m_FourBar));
+    }
+    else if(auto4)
+    {
+      return (new Auto4(m_Shooter, m_DriveBase,m_FourBar));
+    }
+    else
+    {
+      return null; 
+    }
+
+   */
+  return  (new Auto4(m_Shooter, m_DriveBase,m_FourBar));
   }
   
 }
