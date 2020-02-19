@@ -7,7 +7,6 @@
 
 package frc.robot.commands.DriveBase;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -100,7 +99,7 @@ public class DriveForDistance extends CommandBase {
       m_DriveBase.setRight(spd+0.03);
       m_DriveBase.setLeft(spd);
     }
-    time.delay(0.02);
+    Timer.delay(0.02);
     System.out.println("-----------done execute-----------");
 
   }
@@ -112,7 +111,7 @@ public class DriveForDistance extends CommandBase {
     brake();
     System.out.println("-----------end brake-----------");
 
-    time.delay(0.15);
+    Timer.delay(0.15);
 
     m_DriveBase.setRight(0.0);
     m_DriveBase.setLeft(0.0);

@@ -61,8 +61,6 @@ public class VisionCommand extends CommandBase {
     m_XboxController = xbox;
     time = new Timer();
     addRequirements(vision);
-    //addRequirements(shooter);
-    //addRequirements(FB);
   }
 
   // Called when the command is initially scheduled.

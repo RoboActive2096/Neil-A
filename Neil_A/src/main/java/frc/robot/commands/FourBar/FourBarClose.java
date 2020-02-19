@@ -44,7 +44,7 @@ public class FourBarClose extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_FourBar.setFourbarSpeed(0.0);
-    time.delay(0.2);
+    Timer.delay(0.2);
     m_FourBar.setIntakeSpeed(0.0);
 
   }

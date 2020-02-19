@@ -37,7 +37,7 @@ public class ShooterForSecond extends CommandBase {
     m_Shooter.setDeliveryspeed(0);
     m_Shooter.setLoadingSpeed(0);
     m_Shooter.setShooterSpeed(speed);
-    time.delay(1);
+    Timer.delay(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

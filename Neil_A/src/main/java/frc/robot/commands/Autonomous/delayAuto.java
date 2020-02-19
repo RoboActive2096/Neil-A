@@ -27,7 +27,7 @@ public class delayAuto extends CommandBase {
   public void initialize() {
     time.stop();
     time.reset();
-    time.delay(timeToDelay);
+    Timer.delay(timeToDelay);
 
   }
 
