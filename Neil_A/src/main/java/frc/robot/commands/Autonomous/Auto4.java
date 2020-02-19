@@ -15,16 +15,12 @@ import frc.robot.commands.FourBar.FourBarWheelsOn;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
+
 public class Auto4 extends SequentialCommandGroup {
   /**
-   * Creates a new Auto4.
+   * Creates a new Auto4 - same as 3 but one less ball in total.
    */
   public Auto4(Shooter sh,DriveBase db,FourBar fb) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
     super(new GyroTurn(db, 18, false),new ShooterForSecond(sh,2,0.728),new GyroTurn(db, 158, false),new openfourBarWhileDriving(db, 4, fb),new GyroCloseForbarAndShooter(db, fb, sh, 158, true) ,new FourBarWheelsOn(fb),new parallelShooterWithFourBar(sh,fb, 4),new FourBarWheelsOff(fb),new delayAuto(15));
   }
 }

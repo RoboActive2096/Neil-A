@@ -17,16 +17,11 @@ import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Auto3 extends SequentialCommandGroup {
   /**
-   * Creates a new Auto3.
+   * Creates a new Auto3 - just shooting from the side and collecting 3 balls and then try to shoot them.
    */
   public Auto3(Shooter sh,DriveBase db,FourBar fb) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
     super(new GyroTurn(db, 11, false),new ShooterForSecond(sh,2,0.728),new GyroTurn(db, 150, false),new openfourBarWhileDriving(db, 4.9, fb),new GyroTurn(db, 159, true),new FourBarWheelsOn(fb),new FourBarClose(fb),new parallelShooterWithFourBar(sh,fb, 4),new FourBarWheelsOff(fb),new delayAuto(15));
   }
 }

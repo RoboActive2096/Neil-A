@@ -13,16 +13,11 @@ import frc.robot.commands.DriveBase.DriveForDistance;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Shooter;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Auto1 extends SequentialCommandGroup {
   /**
-   * Creates a new Auto1.
+   * Creates a new Auto1 -  just shooting and driving backward
    */
   public Auto1(Shooter shoot,DriveBase drive) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
     super(new ShooterForSecond(shoot, 4,0.728), new DriveForDistance(drive, -2),new delayAuto(12));
   }
 }
