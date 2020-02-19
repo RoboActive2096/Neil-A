@@ -71,7 +71,7 @@ public class VisionCommand extends CommandBase {
     m_DriveBase.setLeft(0.0);
     m_DriveBase.setRight(0.0);
     m_vision.startProcess();
-    time.delay(0.8);
+    Timer.delay(0.8);
     time.stop();
     time.reset();
     time.start();
@@ -191,10 +191,10 @@ public class VisionCommand extends CommandBase {
     }
     */
     while(!m_Joystick.getRawButton(6)){
-      time.delay(0.9);
+      Timer.delay(0.9);
       m_shooter.setLoadingSpeed(0.6);
       m_shooter.setDeliveryspeed(-0.4);
-      time.delay(0.023);
+      Timer.delay(0.023);
       time.start();
      
     }
