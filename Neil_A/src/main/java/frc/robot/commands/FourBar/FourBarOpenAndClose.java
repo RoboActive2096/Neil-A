@@ -7,7 +7,6 @@
 
 package frc.robot.commands.FourBar;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Autonomous.delayAuto;
 import frc.robot.commands.FourBar.FourBarHalfClose;

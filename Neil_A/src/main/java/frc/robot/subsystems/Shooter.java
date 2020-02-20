@@ -15,8 +15,6 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -111,7 +109,7 @@ public class Shooter extends SubsystemBase {
       }else{
         Angle.set(ControlMode.PercentOutput, speed);
       }
-      time.delay(0.023);
+      Timer.delay(0.023);
     }
     Angle.set(ControlMode.PercentOutput, 0.0);
     return true;

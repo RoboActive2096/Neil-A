@@ -61,8 +61,6 @@ public class VisionCommand extends CommandBase {
     m_XboxController = xbox;
     time = new Timer();
     addRequirements(vision);
-    //addRequirements(shooter);
-    //addRequirements(FB);
   }
 
   // Called when the command is initially scheduled.
@@ -73,7 +71,7 @@ public class VisionCommand extends CommandBase {
     m_DriveBase.setLeft(0.0);
     m_DriveBase.setRight(0.0);
     m_vision.startProcess();
-    time.delay(0.8);
+    Timer.delay(0.8);
     time.stop();
     time.reset();
     time.start();
@@ -173,10 +171,8 @@ public class VisionCommand extends CommandBase {
     setSpeedMotor(0.0);
     donedone = false;
 
-    
     double width = m_vision.width.getDouble(-1.0);
-   // int pos = -45 * (int)width + 6980;
-    int pos = -45 * (int)width/2 + 7050;
+    int pos = -45 * (int)width/2 + 7050; // int pos = -45 * (int)width + 6980;
    /* if(m_shooter.setPointToAngle(pos)){
       //
       while(!m_Joystick.getRawButton(6)){
@@ -192,11 +188,13 @@ public class VisionCommand extends CommandBase {
       System.out.println("Not setting angle :( ");
     }
     */
-    while(!m_Joystick.getRawButton(6)){
-      time.delay(0.9);
+
+    while(!m_Joystick.getRawButton(6))
+    {
+      Timer.delay(0.9);
       m_shooter.setLoadingSpeed(0.6);
       m_shooter.setDeliveryspeed(-0.4);
-      time.delay(0.023);
+      Timer.delay(0.023);
       time.start();
      
     }
@@ -206,7 +204,6 @@ public class VisionCommand extends CommandBase {
     time.stop();
     time.reset();
     time.stop();
-    //time.start();
   }
 
   double last_error = 800;
@@ -214,7 +211,7 @@ public class VisionCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //System.out.println("err" + (last_error - (Math.abs(m_vision.xCenter.getDouble(-1.0) - 128))));
+    
    /* if(m_Joystick.getRawButton(4)){
       m_shooter.setShooterSpeed(0.72);
       return true;

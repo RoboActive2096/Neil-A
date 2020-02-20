@@ -10,7 +10,6 @@ package frc.robot;
 import java.util.Map;
 
 import javax.lang.model.util.ElementScanner6;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -35,7 +34,6 @@ import frc.robot.commands.Autonomous.Auto1;
 import frc.robot.commands.Autonomous.Auto2;
 import frc.robot.commands.Autonomous.Auto3;
 import frc.robot.commands.Autonomous.Auto4;
-import frc.robot.commands.Autonomous.parallelShooterWithFourBar;
 import frc.robot.commands.Climb.*;
 import frc.robot.commands.Roulette.*;
 import frc.robot.commands.Shooter.*;

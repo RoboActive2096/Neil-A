@@ -17,12 +17,9 @@ import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Auto2 extends SequentialCommandGroup {
   /**
-   * Creates a new Auto2.
+   * Creates a new Auto2 - just shooting from the side and collecting 5 balls.
    */
   public Auto2(Shooter sh,DriveBase db,FourBar fb) {
     // Add your commands in the super() call, e.g.
