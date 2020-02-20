@@ -28,6 +28,6 @@ public class Auto4 extends SequentialCommandGroup {
   public Auto4(Shooter sh,DriveBase db,FourBar fb) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new GyroTurn(db, 18, false),new ShooterForSecond(sh,2,0.728),new GyroTurn(db, 158, false),new openfourBarWhileDriving(db, 4, fb),new GyroCloseForbarAndShooter(db, fb, sh, 158, true) ,new FourBarWheelsOn(fb),new parallelShooterWithFourBar(sh,fb, 4),new FourBarWheelsOff(fb),new delayAuto(15));
+    super(new GyroTurn(db, 11, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 156, false),new openfourBarWhileDriving(db, 4.5, fb), new ClosefourBarWhileDriving(db, -4, fb),new GyroCloseForbarAndShooter(db, fb, sh, 160, true),new parallelShooterWithFourBar(sh,fb,db ,5),new delayAuto(15));
   }
 }

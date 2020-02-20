@@ -83,7 +83,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    m_autonomousCommand.schedule();
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
+    else
+    {
+      System.out.println("No Autonomous command was sent");
+    }
   }
 
 

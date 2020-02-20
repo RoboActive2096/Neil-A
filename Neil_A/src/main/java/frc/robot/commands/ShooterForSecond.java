@@ -19,11 +19,13 @@ public class ShooterForSecond extends CommandBase {
   double targetTime;
   Shooter m_Shooter;
   double speed;
-  public ShooterForSecond(Shooter shooter, double t,double spd){
+  double timeDelay;
+  public ShooterForSecond(Shooter shooter, double t,double spd, double timedelay){
     time = new Timer();
     m_Shooter = shooter;
     targetTime = t;
     speed = spd;
+    timeDelay = timedelay;
   addRequirements(shooter);
   }
 
@@ -37,14 +39,14 @@ public class ShooterForSecond extends CommandBase {
     m_Shooter.setDeliveryspeed(0);
     m_Shooter.setLoadingSpeed(0);
     m_Shooter.setShooterSpeed(speed);
-    time.delay(1);
+    time.delay(timeDelay);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     m_Shooter.setLoadingSpeed(0.9);
-    m_Shooter.setDeliveryspeed(-0.6);
+    m_Shooter.setDeliveryspeed(-0.9);
     m_Shooter.setShooterSpeed(speed);
   }
 

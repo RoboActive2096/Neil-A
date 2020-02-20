@@ -25,6 +25,6 @@ public class GyroCloseForbarAndShooter extends ParallelCommandGroup {
   public GyroCloseForbarAndShooter(DriveBase m_Drivebase, FourBar m_fourbar, Shooter m_shooter, double angle, boolean right) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    super(new GyroTurn(m_Drivebase, angle, right), new FourBarCloseForAuto(m_fourbar), new OnlyShooter(m_shooter));
+    super(new GyroTurn(m_Drivebase, angle, right), new OnlyShooter(m_shooter));
   }
 }

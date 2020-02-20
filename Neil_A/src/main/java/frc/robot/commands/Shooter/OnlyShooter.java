@@ -7,6 +7,9 @@
 
 package frc.robot.commands.Shooter;
 
+import java.sql.Time;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
@@ -14,9 +17,11 @@ public class OnlyShooter extends CommandBase {
   /**
    * Creates a new OnlyShooter.
    */
+  Timer time;
   Shooter m_Shooter;
   public OnlyShooter(Shooter shooter) {
     m_Shooter = shooter;
+    time = new Timer();
     addRequirements(shooter);
         // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -24,6 +29,9 @@ public class OnlyShooter extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    time.stop();
+    time.reset();
+    time.start();
     m_Shooter.setShooterSpeed(0.728);
   }
 
@@ -35,11 +43,15 @@ public class OnlyShooter extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_Shooter.setShooterSpeed(0.728);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(time.get()>3){
+      return true;
+    }
     return false;
   }
 }

@@ -5,26 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Autonomous;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.Autonomous.delayAuto;
-import frc.robot.commands.FourBar.FourBarHalfClose;
-import frc.robot.commands.FourBar.FourBarHalfOpen;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.DriveBase.DriveForDistance;
+import frc.robot.commands.FourBar.FourBarCloseForAuto;
+import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class FourBarOpenAndClose extends SequentialCommandGroup {
+public class ClosefourBarWhileDriving extends ParallelCommandGroup {
   /**
-   * Creates a new FourBarOpenAndClose.
+   * Creates a new ClosefourBarWhileDriving.
    */
-  
-  public FourBarOpenAndClose(FourBar fourBar) {
+  public ClosefourBarWhileDriving(DriveBase db,double distance,FourBar fb) {
     // Add your commands in the super() call, e.g.
-     super(new FourBarHalfOpen(fourBar), new FourBarHalfClose(fourBar), new delayAuto(0.25));
-    
+    // super(new FooCommand(), new BarCommand());
+    super(new DriveForDistance(db, distance),new FourBarCloseForAuto(fb));
   }
 }

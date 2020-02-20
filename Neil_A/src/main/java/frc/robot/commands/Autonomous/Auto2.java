@@ -27,7 +27,7 @@ public class Auto2 extends SequentialCommandGroup {
   public Auto2(Shooter sh,DriveBase db,FourBar fb) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new GyroTurn(db, 13, false),new ShooterForSecond(sh, 2,0.728),new GyroTurn(db, 155, false),new FourBarOpen(fb),new delayAuto(0.7),new DriveForDistance(db, 8),new FourBarClose(fb),new DriveForDistance(db, -8),new delayAuto(15));
+    super(new GyroTurn(db, 13, false),new ShooterForSecond(sh, 2,0.728,1),new GyroTurn(db, 155, false),new FourBarOpen(fb),new delayAuto(0.7),new DriveForDistance(db, 8),new FourBarClose(fb),new DriveForDistance(db, -8),new delayAuto(15));
   }
 
 }

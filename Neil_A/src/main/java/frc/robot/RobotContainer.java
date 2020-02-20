@@ -25,7 +25,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.DriveBase.*;
 import frc.robot.commands.FourBar.*;
-import frc.robot.commands.FourBarOpenAndClose;
 import frc.robot.commands.GyroTurn;
 import frc.robot.commands.ShooterForSecond;
 import frc.robot.commands.VisionAutoAll;
@@ -89,6 +88,28 @@ public class RobotContainer {
     m_vision = new Vision(m_DriveBase);
     m_DriveBase = new DriveBase();
     GlobalFlashState = 0;
+
+    auto1 = Shuffleboard.getTab("AutoChoose")
+        .add("Auto 1 - Toggle", false)
+        .withWidget("Toggle Button")
+        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
+        .getEntry();
+    auto2 = Shuffleboard.getTab("AutoChoose")
+        .add("Auto 2 - Toggle", false)
+        .withWidget("Toggle Button")
+        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
+        .getEntry(); 
+    auto3 = Shuffleboard.getTab("AutoChoose")
+        .add("Auto 3 - Toggle", false)
+        .withWidget("Toggle Button")
+        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
+        .getEntry(); 
+    auto4 = Shuffleboard.getTab("AutoChoose")
+        .add("Auto 4 - Toggle", false)
+        .withWidget("Toggle Button")
+        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
+        .getEntry(); 
+    
     
     m_Shooter.setDefaultCommand(new ShooterCommand(m_XController, m_Shooter,m_Joystick));
     m_Climb.setDefaultCommand(new ClimbCommand(m_XController, m_Climb));
@@ -112,10 +133,10 @@ public class RobotContainer {
     new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_FourBar));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
     new JoystickButton(m_Joystick, 2).whenPressed(new Auto1(m_Shooter, m_DriveBase));
-    new JoystickButton(m_Joystick, 8).whenPressed(new DriveForDistance(m_DriveBase,4));
+    new JoystickButton(m_Joystick, 8).whenPressed(new DriveForDistance(m_DriveBase,-4));
     new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
-    new JoystickButton(m_XController, 8).whenPressed(new RouletteOpen(m_Roulette));
-    new JoystickButton(m_XController, 7).whenPressed(new RouletteClose(m_Roulette));
+    new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightSmall).whenPressed(new RouletteOpen(m_Roulette));
+    new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftSmall).whenPressed(new RouletteClose(m_Roulette));
   }
 
 
@@ -127,51 +148,34 @@ public class RobotContainer {
   
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    auto1 = Shuffleboard.getTab("AutoChoose")
-        .add("Auto 1 - Toggle", false)
-        .withWidget("Toggle Button")
-        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
-        .getEntry();
-    auto2 = Shuffleboard.getTab("AutoChoose")
-        .add("Auto 2 - Toggle", false)
-        .withWidget("Toggle Button")
-        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
-        .getEntry(); 
-    auto3 = Shuffleboard.getTab("AutoChoose")
-        .add("Auto 3 - Toggle", false)
-        .withWidget("Toggle Button")
-        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
-        .getEntry(); 
-    auto4 = Shuffleboard.getTab("AutoChoose")
-        .add("Auto 4 - Toggle", false)
-        .withWidget("Toggle Button")
-        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
-        .getEntry(); 
 
-//hkjgh
-    /*if(auto1)
+    if(auto1.getBoolean(false))
     {
+      System.out.println("Auto 1 was chosen");
       return (new Auto1(m_Shooter, m_DriveBase));
     }
-    else if(auto2)
+    else if(auto2.getBoolean(false))
     {
+      System.out.println("Auto 2 was chosen");
       return (new Auto2(m_Shooter, m_DriveBase,m_FourBar));
     }
-    else if(auto3)
+    else if(auto3.getBoolean(false))
     {
+      System.out.println("Auto 3 was chosen");
       return (new Auto3(m_Shooter, m_DriveBase,m_FourBar));
     }
-    else if(auto4)
+    else if(auto4.getBoolean(false))
     {
+      System.out.println("Auto 4 was chosen");
       return (new Auto4(m_Shooter, m_DriveBase,m_FourBar));
     }
     else
     {
+      System.out.println("no Auto was chosen");
       return null; 
     }
 
-   */
-  return  (new Auto4(m_Shooter, m_DriveBase,m_FourBar));
+    //Was by default returning auto4
   }
   
 }

@@ -42,7 +42,7 @@ public class ClimbCommand extends CommandBase {
       m_Climb.setElevators(0.0);
     }
     if(m_xController.getRawButton(1)){
-      m_Climb.setwinchSpeed(0.9);
+      m_Climb.setwinchSpeed(-0.95);
     }else{
       m_Climb.setwinchSpeed(0.0);
     }

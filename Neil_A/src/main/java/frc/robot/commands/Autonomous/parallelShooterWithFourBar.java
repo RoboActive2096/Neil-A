@@ -9,9 +9,12 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.ShooterForSecond;
+import frc.robot.commands.DriveBase.DriveForDistance;
 import frc.robot.commands.FourBar.FourBarClose;
 import frc.robot.commands.FourBar.FourBarHalfOpen;
 import frc.robot.commands.FourBar.FourBarOpen;
+import frc.robot.commands.FourBar.FourBarOpenAndClose;
+import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
 
@@ -22,9 +25,9 @@ public class parallelShooterWithFourBar extends ParallelCommandGroup {
   /**
    * Creates a new testParallel.
    */
-  public parallelShooterWithFourBar(Shooter sh,FourBar fb,double seconds) {
+  public parallelShooterWithFourBar(Shooter sh,FourBar fb, DriveBase m_DriveBase ,double seconds) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    super(new ShooterForSecond(sh, seconds,0.71));
+    super(new ShooterForSecond(sh, seconds,0.71,0), new FourBarOpenAndClose(fb), new DriveForDistance(m_DriveBase, 0));
   }
 }

@@ -26,6 +26,6 @@ public class Auto5 extends SequentialCommandGroup {
   public Auto5(DriveBase m_DriveBase, FourBar m_FourBar, Shooter m_shooter) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new openfourBarWhileDriving(m_DriveBase, 2, m_FourBar), new GyroCloseForbarAndShooter(m_DriveBase, m_FourBar, m_shooter, 120, false), new DriveForDistance(m_DriveBase, 3), new ShooterForSecond(m_shooter, 3, 0.728),new delayAuto(15));
+    super(new openfourBarWhileDriving(m_DriveBase, 2, m_FourBar), new GyroCloseForbarAndShooter(m_DriveBase, m_FourBar, m_shooter, 120, false), new DriveForDistance(m_DriveBase, 3), new ShooterForSecond(m_shooter, 3, 0.728,1),new delayAuto(15));
   }
 }

@@ -95,9 +95,9 @@ public class DriveForDistance extends CommandBase {
     SmartDashboard.putNumber("error", error);
     if(revrse){
       m_DriveBase.setRight(spd);
-      m_DriveBase.setLeft(spd+0.03);
+      m_DriveBase.setLeft(spd);
     }else{
-      m_DriveBase.setRight(spd+0.03);
+      m_DriveBase.setRight(spd);
       m_DriveBase.setLeft(spd);
     }
     time.delay(0.02);

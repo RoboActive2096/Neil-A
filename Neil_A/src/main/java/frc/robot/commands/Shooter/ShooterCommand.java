@@ -41,7 +41,7 @@ public class ShooterCommand extends CommandBase {
     SmartDashboard.putNumber("testangle", angle);
 
     if(m_xController.getRawAxis(3)>0.2){
-     m_Shooter.setShooterSpeed(0.728);//0.728 
+     m_Shooter.setShooterSpeed(0.8);//0.728 
     }else{
       m_Shooter.setShooterSpeed(0.0);
     }
@@ -51,6 +51,8 @@ public class ShooterCommand extends CommandBase {
       m_Shooter.setDeliveryspeed(-1);
     }else if(m_xController.getRawButton(4)){
       m_Shooter.setLoadingSpeed(0.9);
+    }else if(m_xController.getRawButton(3)){
+      m_Shooter.setDeliveryspeed(0.7);
     }else{
       m_Shooter.setLoadingSpeed(0.0);
       m_Shooter.setDeliveryspeed(0.0);
