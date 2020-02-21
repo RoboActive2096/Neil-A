@@ -55,14 +55,17 @@ public class Shooter extends SubsystemBase {
   }
   
   public void setAngelspeed(double speed){
-    if(speed>0 && !maxDigitalInput.get()){
+    if(speed<0 && !maxDigitalInput.get()){ // was with ! -- 21.02.2020
       speed=0.0;
 
-    }else if(speed<0 && !minDigitalInput.get()){
+    }else if(speed>0 && !minDigitalInput.get()){ // was with ! -- 21.02.2020
       System.out.println("done");
       speed=0.0;
       setEncoderAngleChanger(0);
-
+    }
+    else
+    {
+      //TODO: add Rumble
     }
 
     Angle.set(ControlMode.PercentOutput, speed);
