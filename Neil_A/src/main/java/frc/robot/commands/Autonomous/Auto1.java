@@ -20,6 +20,6 @@ public class Auto1 extends SequentialCommandGroup {
   public Auto1(Shooter shoot,DriveBase drive) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new ShooterForSecond(shoot, 4,0.728,1), new DriveForDistance(drive, -2),new delayAuto(12));
+    super(new ShooterForSecond(shoot, 4,0.728,1), new DriveForDistance(drive, -0.5),new delayAuto(12));
   }
 }
