@@ -34,7 +34,7 @@ public class RouletteCommand extends CommandBase {
   @Override
   public void execute() {
     if(m_XboxController.getRawAxis(2)>0.5){
-      m_Roulette.setWheelaspeed(0.5);
+      m_Roulette.setWheelaspeed(0.7);
     }else{
       m_Roulette.setWheelaspeed(0.0);
     }

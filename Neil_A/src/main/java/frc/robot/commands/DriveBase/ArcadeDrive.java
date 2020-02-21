@@ -46,6 +46,7 @@ public class ArcadeDrive extends CommandBase {
       m_dBase.resetGyro();
       m_dBase.calirationGyro();
     }
+    
     final double x = -getX() * 0.9;
     final double y = getY() * 0.9;
     driveTry(x, y);

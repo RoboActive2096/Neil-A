@@ -10,12 +10,18 @@ package frc.robot;
 import java.util.Map;
 
 import javax.lang.model.util.ElementScanner6;
+
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
@@ -37,6 +43,7 @@ import frc.robot.commands.Autonomous.Auto4;
 import frc.robot.commands.Climb.*;
 import frc.robot.commands.Roulette.*;
 import frc.robot.commands.Shooter.*;
+import frc.robot.commands.SystemsCheck.SystemsCheck;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
@@ -64,12 +71,11 @@ public class RobotContainer {
   Joystick m_Joystick;
   Vision m_vision;
   int GlobalFlashState;
-  
-  NetworkTableEntry auto1;
-  NetworkTableEntry auto2;
-  NetworkTableEntry auto3;
-  NetworkTableEntry auto4;
-  
+
+  //Auto Choosing Variables
+  NetworkTableInstance inst;
+  NetworkTable autoChooserTable;
+  NetworkTableEntry selectedAutonomous;
   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -86,29 +92,27 @@ public class RobotContainer {
     m_vision = new Vision(m_DriveBase);
     m_DriveBase = new DriveBase();
     GlobalFlashState = 0;
-
+    
+    SendableChooser autonomousChooserComboBox = new SendableChooser<String>();
+    autonomousChooserComboBox.addOption("Auto 1", null); //Name of option - please keep the null
+    autonomousChooserComboBox.addOption("Auto 2", null); //Name of option - please keep the null
+    autonomousChooserComboBox.addOption("Auto 3", null); //Name of option - please keep the null
+    autonomousChooserComboBox.addOption("Auto 4", null); //Name of option - please keep the null
+    autonomousChooserComboBox.addOption("Systems Check", null);
+    Shuffleboard.getTab("AutoChoose")
+      .add("AutoChooserBox", autonomousChooserComboBox);
+    
+    /* ##### !!!! DO NOT DELETE THIS !!!! ##### */
+    //This is an example of a button
+    /*
+    NetworkTableEntry auto1;
     auto1 = Shuffleboard.getTab("AutoChoose")
         .add("Auto 1 - Toggle", false)
         .withWidget("Toggle Button")
         .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
         .getEntry();
-    auto2 = Shuffleboard.getTab("AutoChoose")
-        .add("Auto 2 - Toggle", false)
-        .withWidget("Toggle Button")
-        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
-        .getEntry(); 
-    auto3 = Shuffleboard.getTab("AutoChoose")
-        .add("Auto 3 - Toggle", false)
-        .withWidget("Toggle Button")
-        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
-        .getEntry(); 
-    auto4 = Shuffleboard.getTab("AutoChoose")
-        .add("Auto 4 - Toggle", false)
-        .withWidget("Toggle Button")
-        .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
-        .getEntry(); 
-    
-    
+    */ 
+
     m_Shooter.setDefaultCommand(new ShooterCommand(m_XController, m_Shooter,m_Joystick));
     m_Climb.setDefaultCommand(new ClimbCommand(m_XController, m_Climb));
     m_Roulette.setDefaultCommand(new RouletteCommand(m_XController, m_Roulette, m_FourBar));
@@ -124,7 +128,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
+  private void configureButtonBindings()
+  {
+
     new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonRight).whileHeld(new FourBarOpenAndClose(m_FourBar));
@@ -144,35 +150,32 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   
+ 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
 
-    if(auto1.getBoolean(false))
-    {
-      System.out.println("Auto 1 was chosen");
-      return (new Auto1(m_Shooter, m_DriveBase));
-    }
-    else if(auto2.getBoolean(false))
-    {
-      System.out.println("Auto 2 was chosen");
-      return (new Auto2(m_Shooter, m_DriveBase,m_FourBar));
-    }
-    else if(auto3.getBoolean(false))
-    {
-      System.out.println("Auto 3 was chosen");
-      return (new Auto3(m_Shooter, m_DriveBase,m_FourBar));
-    }
-    else if(auto4.getBoolean(false))
-    {
-      System.out.println("Auto 4 was chosen");
-      return (new Auto4(m_Shooter, m_DriveBase,m_FourBar));
-    }
-    else
-    {
-      System.out.println("no Auto was chosen");
-      return null; 
-    }
+    
+    inst = NetworkTableInstance.getDefault();
+    autoChooserTable = inst.getTable("Shuffleboard/AutoChoose/AutoChooserBox");
+    selectedAutonomous = autoChooserTable.getEntry("active");
+    String selectedAutonomousString = selectedAutonomous.getString("Error - No autonomous selected");
 
+    SmartDashboard.putString("Selected Auto is", selectedAutonomousString);
+    switch(selectedAutonomousString)
+    {
+      case "Auto 1":
+        return (new Auto1(m_Shooter, m_DriveBase));
+      case "Auto 2":
+        return (new Auto2(m_Shooter, m_DriveBase,m_FourBar));
+      case "Auto 3":
+        return (new Auto3(m_Shooter, m_DriveBase,m_FourBar));
+      case "Auto 4":
+        return (new Auto4(m_Shooter, m_DriveBase,m_FourBar));
+      case "Systems Check":
+        return (new SystemsCheck(m_DriveBase, 1.2, m_Shooter, m_Roulette, m_FourBar, m_Climb));
+      default:
+        return null;
+    }
     //Was by default returning auto4
   }
   

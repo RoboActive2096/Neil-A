@@ -5,57 +5,43 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Roulette;
+package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Roulette;
+import frc.robot.subsystems.DriveBase;
 
-public class RouletteOpen extends CommandBase {
+public class GyroReset extends CommandBase {
   /**
-   * Creates a new RouletteOpen.
+   * Creates a new GyroReset.
    */
-
-  Roulette m_Roulette;
-  Timer time;
-  public RouletteOpen(Roulette RU) {
-    m_Roulette = RU;
-    time = new Timer();
-    addRequirements(RU);
+  DriveBase m_DriveBase;
+  public GyroReset(DriveBase driveBase) {
+    m_DriveBase = driveBase;
+    addRequirements(driveBase);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    time.reset();
-    time.stop();
-    time.reset();
-    time.start();
-    m_Roulette.setRoulettespeed(0.4);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("0.4");
+    m_DriveBase.resetGyro();
     
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-   m_Roulette.setRoulettespeed(0.15);
-   System.out.println("end");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>1){
-      System.out.println("done");
-      return true;
-    }
-    return false;
+    return true;
   }
 }

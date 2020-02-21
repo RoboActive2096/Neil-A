@@ -59,6 +59,7 @@ public class Shooter extends SubsystemBase {
       speed=0.0;
 
     }else if(speed<0 && !minDigitalInput.get()){
+      System.out.println("done");
       speed=0.0;
       setEncoderAngleChanger(0);
 

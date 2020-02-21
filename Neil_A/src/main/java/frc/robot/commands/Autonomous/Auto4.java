@@ -8,6 +8,8 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.GyroReset;
+import frc.robot.commands.GyroReset2;
 import frc.robot.commands.GyroTurn;
 import frc.robot.commands.ShooterForSecond;
 import frc.robot.commands.FourBar.FourBarWheelsOff;
@@ -23,6 +25,8 @@ public class Auto4 extends SequentialCommandGroup {
   public Auto4(Shooter sh,DriveBase db,FourBar fb) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new GyroTurn(db, 11, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 156, false),new openfourBarWhileDriving(db, 4.5, fb), new ClosefourBarWhileDriving(db, -4, fb),new GyroCloseForbarAndShooter(db, fb, sh, 160, true),new parallelShooterWithFourBar(sh,fb,db ,5),new delayAuto(15));
+   // super(new GyroReset(db),new GyroTurn(db, 20, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 180, false),new openfourBarWhileDriving(db, 4.5, fb), new ClosefourBarWhileDriving(db, -4, fb),new GyroCloseForbarAndShooter(db, fb, sh, 20, false),new parallelShooterWithFourBar(sh,fb,db ,5),new delayAuto(15));
+    
+   super(new GyroReset(db),new GyroTurn(db, 20, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 180, false),new openfourBarWhileDriving(db, 4.5, fb),new GyroReset2(db), new ClosefourBarWhileDriving(db, -4, fb),new GyroTurn(db, 160, true),new parallelShooterWithFourBar(sh,fb,db ,5),new delayAuto(15));
   }
 }

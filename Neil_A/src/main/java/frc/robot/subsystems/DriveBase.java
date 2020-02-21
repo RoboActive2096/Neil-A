@@ -8,10 +8,12 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -30,23 +32,37 @@ public class DriveBase extends SubsystemBase {
   Joystick m_Joystick;
 
   Gyro gyro;
+  AHRS ahrs; /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
   public DriveBase() 
   {
-    gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);   
+    gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0); 
+    ahrs = new AHRS(SerialPort.Port.kMXP); 
+    
+     
   }
 
   public void calirationGyro(){
-    gyro.calibrate();
+    //gyro.calibrate();
+    //ahrs.calibrate();
+  
   }
 
 
   public double getGyroAngle(){
-    return this.gyro.getAngle();
+    if(!ahrs.isConnected()){
+      return gyro.getAngle();
+    }else{
+     return ahrs.getAngle();
+    }
   }
 
   public void resetGyro(){
-    this.gyro.reset();
+    if(!ahrs.isConnected()){
+      gyro.reset();
+    }else{
+      ahrs.reset();
+    }
   }
 
 

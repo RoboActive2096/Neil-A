@@ -173,21 +173,22 @@ public class VisionCommand extends CommandBase {
 
     double width = m_vision.width.getDouble(-1.0);
     int pos = -45 * (int)width/2 + 7050; // int pos = -45 * (int)width + 6980;
-   /* if(m_shooter.setPointToAngle(pos)){
+    m_shooter.setPointToAngle(pos);
+    //if(m_shooter.setPointToAngle(pos)){
       //
-      while(!m_Joystick.getRawButton(6)){
+     /* while(!m_Joystick.getRawButton(6)){
         time.delay(1.5);
         m_shooter.setLoadingSpeed(0.6);
         m_shooter.setDeliveryspeed(-0.4);
         time.delay(0.023);
         time.start();
        
-      }
-      m_shooter.setPointToAngle(300);
-    }else{
-      System.out.println("Not setting angle :( ");
-    }
-    */
+      }*/
+     // m_shooter.setPointToAngle(300);
+    //}else{
+    //  System.out.println("Not setting angle :( ");
+    //}
+    
 
     while(!m_Joystick.getRawButton(6))
     {

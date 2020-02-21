@@ -5,57 +5,58 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Roulette;
+package frc.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Roulette;
+import frc.robot.subsystems.Climb;
 
-public class RouletteOpen extends CommandBase {
+public class CloseElevatorForSeconds extends CommandBase {
   /**
-   * Creates a new RouletteOpen.
+   * Creates a new useElevatorsForSeconds.
    */
-
-  Roulette m_Roulette;
+  Climb m_climb;
   Timer time;
-  public RouletteOpen(Roulette RU) {
-    m_Roulette = RU;
+  double timeToFinish;
+
+  public CloseElevatorForSeconds(Climb climb, double seconds) {
+    timeToFinish = seconds;
+    m_climb = climb;
     time = new Timer();
-    addRequirements(RU);
+    addRequirements(m_climb);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    time.reset();
     time.stop();
     time.reset();
     time.start();
-    m_Roulette.setRoulettespeed(0.4);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("0.4");
-    
-
+    m_climb.setElevators(-0.4);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-   m_Roulette.setRoulettespeed(0.15);
-   System.out.println("end");
+    m_climb.setElevators(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>1){
-      System.out.println("done");
+    if(time.get() > timeToFinish)
+    {
       return true;
     }
-    return false;
+    else
+    {
+      return false;
+    }
+    
   }
 }

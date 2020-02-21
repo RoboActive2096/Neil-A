@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -23,7 +24,8 @@ public class Roulette extends SubsystemBase {
   DigitalInput max = new DigitalInput(2);
   DigitalInput min = new DigitalInput(3);
   public Roulette() {
-
+    Roulette.setNeutralMode(NeutralMode.Brake);
+    wheel.setNeutralMode(NeutralMode.Brake);
   }
 
   public boolean getOpen(){
