@@ -7,6 +7,7 @@
 
 package frc.robot.commands.Climb;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climb;
@@ -17,9 +18,11 @@ public class ClimbCommand extends CommandBase {
    */
   XboxController m_xController;
   Climb m_Climb;
-  public ClimbCommand(XboxController XC, Climb CB) {
+  Joystick m_Joy;
+  public ClimbCommand(XboxController XC, Climb CB, Joystick joystick) {
   m_Climb = CB;
   m_xController = XC;
+  m_Joy = joystick;
   addRequirements(CB);
   }
 
@@ -43,7 +46,12 @@ public class ClimbCommand extends CommandBase {
     }
     if(m_xController.getRawButton(1)){
       m_Climb.setwinchSpeed(-0.95);
-    }else{
+    }else if(m_Joy.getRawButton(8) && m_Joy.getRawButton(3))
+    {
+      m_Climb.setwinchSpeed(0.7);
+    }
+    else
+    {
       m_Climb.setwinchSpeed(0.0);
     }
   

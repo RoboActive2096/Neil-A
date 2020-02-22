@@ -101,6 +101,8 @@ public class RobotContainer {
     autonomousChooserComboBox.addOption("Systems Check", null);
     Shuffleboard.getTab("AutoChoose")
       .add("AutoChooserBox", autonomousChooserComboBox);
+
+    
     
     /* ##### !!!! DO NOT DELETE THIS !!!! ##### */
     //This is an example of a button
@@ -114,7 +116,7 @@ public class RobotContainer {
     */ 
 
     m_Shooter.setDefaultCommand(new ShooterCommand(m_XController, m_Shooter,m_Joystick));
-    m_Climb.setDefaultCommand(new ClimbCommand(m_XController, m_Climb));
+    m_Climb.setDefaultCommand(new ClimbCommand(m_XController, m_Climb, m_Joystick));
     m_Roulette.setDefaultCommand(new RouletteCommand(m_XController, m_Roulette, m_FourBar));
     m_DriveBase.setDefaultCommand(new ArcadeDrive(m_DriveBase, m_Joystick));
     // Configure the button bindings
@@ -137,7 +139,6 @@ public class RobotContainer {
     new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_FourBar));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
     new JoystickButton(m_Joystick, 2).whenPressed(new Auto1(m_Shooter, m_DriveBase));
-    new JoystickButton(m_Joystick, 8).whenPressed(new DriveForDistance(m_DriveBase,-4));
     new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightSmall).whenPressed(new RouletteOpen(m_Roulette));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftSmall).whenPressed(new RouletteClose(m_Roulette));
