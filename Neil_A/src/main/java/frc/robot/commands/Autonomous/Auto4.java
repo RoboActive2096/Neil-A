@@ -27,6 +27,6 @@ public class Auto4 extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
    // super(new GyroReset(db),new GyroTurn(db, 20, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 180, false),new openfourBarWhileDriving(db, 4.5, fb), new ClosefourBarWhileDriving(db, -4, fb),new GyroCloseForbarAndShooter(db, fb, sh, 20, false),new parallelShooterWithFourBar(sh,fb,db ,5),new delayAuto(15));
     
-   super(new GyroReset(db),new GyroTurn(db, 10, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 185, false),new openfourBarWhileDriving(db, 4.5, fb),new GyroReset2(db), new ClosefourBarWhileDriving(db, -4, fb),new GyroTurn(db, 162, true),new parallelShooterWithFourBar(sh,fb,db ,5),new delayAuto(15));
+   super(new GyroReset(db),new GyroTurn(db, 8, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 185, false),new openfourBarWhileDriving(db, 4.5, fb),new GyroReset2(db), new ClosefourBarWhileDriving(db, -4, fb),new GyroTurn(db, 163, true),new parallelShooterWithFourBar(sh,fb,db ,5),new delayAuto(15));
   }
 }

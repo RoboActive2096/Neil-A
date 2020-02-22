@@ -35,8 +35,6 @@ public class SystemsCheck extends SequentialCommandGroup {
      new RouletteOpen(roulette),
      new RouletteClose(roulette),
      new FourBarOpen(fourBar),
-     new FourBarClose(fourBar),
-     new OpenElevatorForSeconds(climb, 1.2),
-     new CloseElevatorForSeconds(climb, 1.2));
+     new FourBarClose(fourBar));
   }
 }

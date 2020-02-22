@@ -42,9 +42,11 @@ public class DriveForDistance extends CommandBase {
     time.stop();
     time.reset();
     time.start();
+    time.delay(0.02);
     m_DriveBase.setRight(0.0);
     m_DriveBase.setLeft(0.0);
     specialResetEncoder();
+    time.delay(0.02);
 
     System.out.println("-----------done init-----------");
 
