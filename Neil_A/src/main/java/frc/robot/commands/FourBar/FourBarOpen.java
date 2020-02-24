@@ -31,7 +31,7 @@ public class FourBarOpen extends CommandBase {
     time.stop();
     time.reset();
     time.start();
-    m_FourBar.setIntakeSpeed(-0.8); 
+    m_FourBar.setIntakeSpeed(-0.6); 
     //TODO: RETURN
   }
 

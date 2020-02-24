@@ -76,6 +76,8 @@ public class RobotContainer {
   NetworkTableInstance inst;
   NetworkTable autoChooserTable;
   NetworkTableEntry selectedAutonomous;
+
+  public static String FourBarState = "close";
   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -133,8 +135,10 @@ public class RobotContainer {
   private void configureButtonBindings()
   {
 
+    //new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarToggle(m_FourBar, FourBarState));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_FourBar));
+    
     new POVButton(m_XController, Constants.XboxButtons.PovButtonRight).whileHeld(new FourBarOpenAndClose(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_FourBar));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
@@ -142,6 +146,14 @@ public class RobotContainer {
     new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightSmall).whenPressed(new RouletteOpen(m_Roulette));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftSmall).whenPressed(new RouletteClose(m_Roulette));
+  }
+
+  public static String getState(){
+    return FourBarState;
+  }
+
+  public static void setState(String tr){
+    FourBarState = tr;
   }
 
 

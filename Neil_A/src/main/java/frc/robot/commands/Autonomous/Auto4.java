@@ -33,7 +33,7 @@ public class Auto4 extends SequentialCommandGroup {
    new GyroTurn(db, 185, false),
    new openfourBarWhileDriving(db, 4.5, fb),
    new GyroReset2(db),
-   new ClosefourBarWhileDriving(db, -4, fb),
+   new ClosefourBarWhileDriving(db, -3.8, fb),
    new GyroTurn(db, 158, true),
    new parallelShooterWithFourBar(sh,fb,db ,5, 0.69),
    new delayAuto(15)); 

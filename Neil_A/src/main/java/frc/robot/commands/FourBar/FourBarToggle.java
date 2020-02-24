@@ -9,15 +9,18 @@ package frc.robot.commands.FourBar;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.FourBar;
 
-public class FourBarClose extends CommandBase {
+public class FourBarToggle extends CommandBase {
   /**
    * Creates a new FourBarOpen.
    */
   FourBar m_FourBar;
   Timer time;
-  public FourBarClose(FourBar fourBar) {
+  String state;
+  public FourBarToggle(FourBar fourBar, String st) {
+    state = st;
     m_FourBar=fourBar;
     time = new Timer();
     addRequirements(fourBar);
@@ -27,35 +30,64 @@ public class FourBarClose extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_FourBar.setIntakeSpeed(-0.3);
     time.stop();
     time.reset();
     time.start();
+    if(state == "close"){
+      m_FourBar.setIntakeSpeed(-0.6); 
+    }else{
+      m_FourBar.setIntakeSpeed(0.8); 
+    }
+    //TODO: RETURN
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    m_FourBar.setFourbarSpeed(0.6);
+    if(state == "close"){
+      m_FourBar.setIntakeSpeed(-0.6); 
+    }else{
+      m_FourBar.setIntakeSpeed(0.8); 
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_FourBar.setFourbarSpeed(0.0);
-    Timer.delay(0.2);
-    m_FourBar.setIntakeSpeed(0.0);
-
+    
+    if(state == "close"){
+      state = "open";
+    }else{
+      state = "close";
+    }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>0.7){
+    
+    if(state == "close"){
+      if(time.get()>0.6){
+        return true;
+      }else{
+        return false;
+      }
+
+    }else{
+      if(time.get()>0.7){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+
+    /*if(time.get()>0.6){ //By default 0.9
       return true;
     }else{
       return false;
-    }
+    }*/
   }
 }

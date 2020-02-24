@@ -35,15 +35,22 @@ public class ClimbCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double RawaxisX = m_xController.getRawAxis(5)-0.3;
-    double RawaxisY = m_xController.getRawAxis(5)+0.3;
-    if(m_xController.getRawAxis(5)>0.2){
+    double RawaxisX = m_xController.getRawAxis(5)-0.15;
+    double RawaxisY = m_xController.getRawAxis(5)+0.15;
+
+    if(m_xController.getRawAxis(5)>0.2)
+    {
       m_Climb.setElevators(RawaxisX);
-    }else if(m_xController.getRawAxis(5)<-0.2){
+    }
+    else if(m_xController.getRawAxis(5)<-0.2)
+    {
       m_Climb.setElevators(RawaxisY);
-    }else{
+    }
+    else
+    {
       m_Climb.setElevators(0.0);
     }
+
     if(m_xController.getRawButton(1)){
       m_Climb.setwinchSpeed(-0.95);
     }else if(m_Joy.getRawButton(8) && m_Joy.getRawButton(3))
