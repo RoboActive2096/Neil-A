@@ -24,6 +24,15 @@ public class Auto3 extends SequentialCommandGroup {
   public Auto3(Shooter sh,DriveBase db,FourBar fb) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new GyroTurn(db, 11, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 150, false),new openfourBarWhileDriving(db, 4.9, fb),new GyroTurn(db, 159, true),new FourBarWheelsOn(fb),new FourBarClose(fb),new parallelShooterWithFourBar(sh,fb,db ,4),new FourBarWheelsOff(fb),new delayAuto(15));
+    super(new GyroTurn(db, 11, false),
+    new ShooterForSecond(sh,2,0.728,1),
+    new GyroTurn(db, 150, false),
+    new openfourBarWhileDriving(db, 4.9, fb),
+    new GyroTurn(db, 159, true),
+    new FourBarWheelsOn(fb),
+    new FourBarClose(fb),
+    new parallelShooterWithFourBar(sh,fb,db ,4, 0.71),
+    new FourBarWheelsOff(fb),
+    new delayAuto(15));
   }
 }

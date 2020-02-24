@@ -31,7 +31,8 @@ public class FourBarOpen extends CommandBase {
     time.stop();
     time.reset();
     time.start();
-    m_FourBar.setIntakeSpeed(-0.8);
+    m_FourBar.setIntakeSpeed(-0.8); 
+    //TODO: RETURN
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -50,7 +51,7 @@ public class FourBarOpen extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>0.9){
+    if(time.get()>0.6){ //By default 0.9
       return true;
     }else{
       return false;

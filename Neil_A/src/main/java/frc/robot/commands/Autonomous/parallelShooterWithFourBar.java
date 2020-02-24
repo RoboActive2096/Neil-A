@@ -25,9 +25,11 @@ public class parallelShooterWithFourBar extends ParallelCommandGroup {
   /**
    * Creates a new testParallel.
    */
-  public parallelShooterWithFourBar(Shooter sh,FourBar fb, DriveBase m_DriveBase ,double seconds) {
+  public parallelShooterWithFourBar(Shooter sh,FourBar fb, DriveBase m_DriveBase ,double seconds, double speed) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    super(new ShooterForSecond(sh, seconds,0.71,0), new FourBarOpenAndClose(fb), new DriveForDistance(m_DriveBase, 0));
+    
+      super(new ShooterForSecond(sh, seconds,speed,0), new FourBarOpenAndClose(fb), new DriveForDistance(m_DriveBase, 0));
+    
   }
 }
