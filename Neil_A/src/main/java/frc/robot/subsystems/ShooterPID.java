@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-class ShooterPID{
+public class ShooterPID{
 
     
 	public final double kP;
@@ -70,6 +70,6 @@ class ShooterPID{
     }
 
     public void logOutput(){
-        System.out.println("Velocity: " + talon.getSelectedSensorVelocity());
+        System.out.println("Velocity: " + talon.getSelectedSensorVelocity() + " AMP: ");
     }
 }

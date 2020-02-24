@@ -35,8 +35,10 @@ public class FourBarToggle extends CommandBase {
     time.start();
     if(state == "close"){
       m_FourBar.setIntakeSpeed(-0.6); 
+      m_FourBar.setFourbarSpeed(-0.6);
     }else{
-      m_FourBar.setIntakeSpeed(0.8); 
+      m_FourBar.setIntakeSpeed(-0.3); 
+      m_FourBar.setFourbarSpeed(0.6);
     }
     //TODO: RETURN
   }
@@ -47,8 +49,10 @@ public class FourBarToggle extends CommandBase {
 
     if(state == "close"){
       m_FourBar.setIntakeSpeed(-0.6); 
+      m_FourBar.setFourbarSpeed(-0.6);
     }else{
-      m_FourBar.setIntakeSpeed(0.8); 
+      m_FourBar.setIntakeSpeed(-0.3); 
+      m_FourBar.setFourbarSpeed(0.6);
     }
   }
 
@@ -61,6 +65,7 @@ public class FourBarToggle extends CommandBase {
       state = "open";
     }else{
       state = "close";
+      m_FourBar.setIntakeSpeed(0.0); 
     }
   }
 

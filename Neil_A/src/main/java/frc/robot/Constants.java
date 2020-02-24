@@ -25,6 +25,7 @@ public final class Constants {
     public final class ClimbPorts{
         public static final int Elevators = 47;
         public static final int winch = 0;
+        public static final int limitClimb = 4;
     }
     public final class RoulettePorts{
         public static final int Roulette = 46;

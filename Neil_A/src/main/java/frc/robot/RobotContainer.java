@@ -116,7 +116,7 @@ public class RobotContainer {
         .withProperties(Map.of("colorWhenTrue", "green", "colorWhenFalse", "maroon"))
         .getEntry();
     */ 
-
+    //m_FourBar.setDefaultCommand(new FourBarDefCommand(m_FourBar, m_XController));
     m_Shooter.setDefaultCommand(new ShooterCommand(m_XController, m_Shooter,m_Joystick));
     m_Climb.setDefaultCommand(new ClimbCommand(m_XController, m_Climb, m_Joystick));
     m_Roulette.setDefaultCommand(new RouletteCommand(m_XController, m_Roulette, m_FourBar));
@@ -135,10 +135,10 @@ public class RobotContainer {
   private void configureButtonBindings()
   {
 
-    //new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarToggle(m_FourBar, FourBarState));
-    new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_FourBar));
-    new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_FourBar));
-    
+    new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarToggle(m_FourBar, FourBarState));
+    //new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_FourBar));
+    //new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_FourBar));
+    new JoystickButton(m_XController, Constants.XboxButtons.ButtonRB).whileHeld(new FourBarTurnOtherWay(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonRight).whileHeld(new FourBarOpenAndClose(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_FourBar));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
