@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -18,7 +19,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.first.wpilibj.controller.*;
 
 public class Shooter extends SubsystemBase {
   /**
@@ -26,12 +27,16 @@ public class Shooter extends SubsystemBase {
    */
   TalonFX Shooter = new TalonFX(Constants.ShootersPorts.Shooter);
   VictorSPX Loading = new VictorSPX(Constants.ShootersPorts.Loading);
-  ShooterPID shooterPIDClass = new ShooterPID(Shooter, 1.6, 0.0000, 0.004, 0.02, 0, 0.0);  
+  //ShooterPID shooterPIDClass = new ShooterPID(Shooter, 1.6, 0.0000, 0.004, 0.02, 0, 0.0);  
   TalonSRX Angle = new TalonSRX(Constants.ShootersPorts.Angle);
   VictorSPX Delivery = new VictorSPX(Constants.ShootersPorts.Delivery);
   DigitalInput maxDigitalInput = new DigitalInput(0);
   DigitalInput minDigitalInput = new DigitalInput(1);
   Timer time;
+
+  PIDController spid;
+
+  
 
   public Shooter() {
     Angle.configFactoryDefault();
@@ -39,10 +44,23 @@ public class Shooter extends SubsystemBase {
     time = new Timer();
     time.stop();
     time.reset();
+
+    Shooter.configFactoryDefault();
+
+		/* Config sensor used for Primary PID [Velocity] */
+    Shooter.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,
+                                            0, 
+                                            30);
+
+
+    spid = new PIDController(0.001, 0.0, 0.0);
+    spid.setTolerance(50, 50);
   }
 
   public void setShooterSpeed(double speed){
-    Shooter.set(ControlMode.PercentOutput, speed);
+    spid.setSetpoint(6000);
+    Shooter.set(ControlMode.PercentOutput, spid.calculate(Shooter.getSelectedSensorVelocity()));
+    System.out.print("Valocity: " + Shooter.getSelectedSensorVelocity() + ", Current Percent: " + Shooter.getStatorCurrent());
     /*if(speed == 0.0){
       stop();
     }else{
@@ -50,8 +68,8 @@ public class Shooter extends SubsystemBase {
     }*/
   }
   public void stop(){
-    //Shooter.set(ControlMode.PercentOutput, speed);
-    shooterPIDClass.stopMotor();
+    Shooter.set(ControlMode.PercentOutput, 0.0);
+    //shooterPIDClass.stopMotor();
   }
 
   public void setLoadingSpeed(double speed){
