@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import java.lang.ModuleLayer.Controller;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -16,6 +18,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,11 +39,12 @@ public class Shooter extends SubsystemBase {
   Timer time;
 
   PIDController spid;
-
+  XboxController m_xController;
   
 
-  public Shooter() {
+  public Shooter(XboxController xController) {
     Angle.configFactoryDefault();
+    m_xController = xController;
     Angle.setNeutralMode(NeutralMode.Brake);
     time = new Timer();
     time.stop();
@@ -53,18 +58,23 @@ public class Shooter extends SubsystemBase {
                                             30);
 
 
-    spid = new PIDController(0.001, 0.0, 0.0);
-    spid.setTolerance(50, 50);
+  //  spid = new PIDController(0.000009, 0.0001, 0.000);
+   // spid.setTolerance(100, 100);
   }
 
   public void setShooterSpeed(double speed){
-    spid.setSetpoint(6000);
-    Shooter.set(ControlMode.PercentOutput, spid.calculate(Shooter.getSelectedSensorVelocity()));
-    System.out.print("Valocity: " + Shooter.getSelectedSensorVelocity() + ", Current Percent: " + Shooter.getStatorCurrent());
-    /*if(speed == 0.0){
+
+    
+    //spid.setSetpoint(14000);
+   Shooter.set(ControlMode.PercentOutput, speed);
+  /*System.out.println("Valocity: " + Shooter.getSelectedSensorVelocity() + ", Current Percent: " + Shooter.getSupplyCurrent() + " Calculated: " +  spid.calculate(Shooter.getSelectedSensorVelocity()));
+    if(speed == 0.0){
       stop();
     }else{
-    shooterPIDClass.setSpeed(10000);
+      double kF = 0.0;
+      double xs = spid.calculate(Shooter.getSelectedSensorVelocity());
+     
+      Shooter.set(ControlMode.PercentOutput, xs + kF);
     }*/
   }
   public void stop(){
@@ -75,15 +85,28 @@ public class Shooter extends SubsystemBase {
   public void setLoadingSpeed(double speed){
     Loading.set(ControlMode.PercentOutput, speed);
   }
+
+  public boolean getMaxDigital()
+  {
+    return maxDigitalInput.get();
+  }
+
+  public boolean getMinDigital()
+  {
+    return minDigitalInput.get();
+  }
   
   public void setAngelspeed(double speed){
     if(speed<0 && !maxDigitalInput.get()){ // was with ! -- 21.02.2020
       speed=0.0;
-
+      
     }else if(speed>0 && !minDigitalInput.get()){ // was with ! -- 21.02.2020
       System.out.println("done");
       speed=0.0;
       setEncoderAngleChanger(0);
+      
+      m_xController.setRumble(RumbleType.kLeftRumble, 0.7);
+      m_xController.setRumble(RumbleType.kRightRumble, 0.7);
     }
     else
     {

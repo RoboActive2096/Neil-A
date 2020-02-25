@@ -12,6 +12,7 @@ import frc.robot.commands.DriveBase.DriveForDistance;
 import frc.robot.commands.FourBar.FourBarCloseForAuto;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
+import frc.robot.subsystems.Shooter;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -20,9 +21,12 @@ public class ClosefourBarWhileDriving extends ParallelCommandGroup {
   /**
    * Creates a new ClosefourBarWhileDriving.
    */
-  public ClosefourBarWhileDriving(DriveBase db,double distance,FourBar fb) {
+  public 
+  
+  ClosefourBarWhileDriving(DriveBase db,double distance,FourBar fb, Shooter shooter) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new DriveForDistance(db, distance),new FourBarCloseForAuto(fb));
+    
+    super(new DriveForDistance(db, distance),new FourBarCloseForAuto(fb), new TurnDelivery(shooter));
   }
 }

@@ -52,7 +52,7 @@ public class ShooterCommand extends CommandBase {
     }else if(m_xController.getRawButton(4)){
       m_Shooter.setLoadingSpeed(0.9);
     }else if(m_xController.getRawButton(3)){
-      m_Shooter.setDeliveryspeed(0.7);
+      m_Shooter.setDeliveryspeed(0.9);
     }else{
       m_Shooter.setLoadingSpeed(0.0);
       m_Shooter.setDeliveryspeed(0.0);

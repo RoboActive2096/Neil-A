@@ -10,6 +10,7 @@ package frc.robot.commands.Autonomous;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.DriveBase.DriveForDistance;
 import frc.robot.commands.FourBar.FourBarOpen;
+import frc.robot.commands.FourBar.Intake;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.FourBar;
+import frc.robot.subsystems.Shooter;
 
 public class FourBarToggle extends CommandBase {
   /**
@@ -19,11 +20,14 @@ public class FourBarToggle extends CommandBase {
   FourBar m_FourBar;
   Timer time;
   String state;
-  public FourBarToggle(FourBar fourBar, String st) {
+  Shooter m_shooter;
+  public FourBarToggle(FourBar fourBar, String st, Shooter shooter) {
     state = st;
     m_FourBar=fourBar;
     time = new Timer();
+    m_shooter = shooter;
     addRequirements(fourBar);
+    addRequirements(m_shooter);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -39,8 +43,9 @@ public class FourBarToggle extends CommandBase {
     }else{
       m_FourBar.setIntakeSpeed(-0.3); 
       m_FourBar.setFourbarSpeed(0.6);
+      //m_shooter.setDeliveryspeed(-1);
     }
-    //TODO: RETURN
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -66,6 +71,8 @@ public class FourBarToggle extends CommandBase {
     }else{
       state = "close";
       m_FourBar.setIntakeSpeed(0.0); 
+      Timer.delay(0.7);
+      m_shooter.setDeliveryspeed(0.0);
     }
   }
 

@@ -87,9 +87,9 @@ public class DriveForDistance extends CommandBase {
     spd = error/Math.abs(this.m_distance);
 
     if(revrse){
-      spd=spd*0.22+0.22;
+      spd=spd*0.22+0.3;
     }else{
-      spd=-spd*0.22-0.22;
+      spd=-spd*0.22-0.3;
     }
 
     System.out.println(error);

@@ -5,67 +5,58 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Autonomous;
+
+
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class ShooterForSecond extends CommandBase {
+public class TurnDelivery extends CommandBase {
   /**
-   * Creates a new ShooterForSecond.
+   * Creates a new TurnDelivery.
    */
-  Timer time;
-  double targetTime;
   Shooter m_Shooter;
-  double speed;
-  double timeDelay;
-  public ShooterForSecond(Shooter shooter, double t,double spd, double timedelay){
-    time = new Timer();
+  Timer timer;
+  public TurnDelivery(Shooter shooter) {
     m_Shooter = shooter;
-    targetTime = t;
-    speed = spd;
-    timeDelay = timedelay;
-  addRequirements(shooter);
+    timer = new Timer();
+    addRequirements(m_Shooter);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    time.stop();
-    time.reset();
-    time.start();  
+    timer.stop();
+    timer.reset();
+    timer.start();
     
-    m_Shooter.setDeliveryspeed(0);
-    m_Shooter.setLoadingSpeed(0);
-    m_Shooter.setShooterSpeed(speed);
-    time.delay(timeDelay);
+    m_Shooter.setDeliveryspeed(-1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    if(time.get()>0.8){
-      m_Shooter.setLoadingSpeed(0.9);
-      m_Shooter.setDeliveryspeed(-0.9);
-    }
-    m_Shooter.setShooterSpeed(speed);
+  public void execute() { 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_Shooter.setDeliveryspeed(0.0);
-    m_Shooter.setLoadingSpeed(0.0);
-    m_Shooter.setShooterSpeed(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>targetTime){
+   if(timer.get() > 2.7)
+   {
       return true;
-    }
-    return false;
+   }
+   else
+   {
+     return false;
+   }
   }
 }

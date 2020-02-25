@@ -7,54 +7,39 @@
 
 package frc.robot.commands.FourBar;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.subsystems.FourBar;
 
-public class FourBarOpen extends CommandBase {
-  /**
-   * Creates a new FourBarOpen.
-   */
-  FourBar m_FourBar;
-  Timer time;
-  public FourBarOpen(FourBar fourBar) {
 
-    m_FourBar=fourBar;
-    time = new Timer();
-    addRequirements(fourBar);
-    // Use addRequirements() here to declare subsystem dependencies.
+public class Intake extends CommandBase {
+  FourBar m_FourBar;
+
+  public Intake(FourBar fourBar) {
+    m_FourBar = fourBar;
+ 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    time.stop();
-    time.reset();
-    time.start();
-    m_FourBar.setIntakeSpeed(-0.6); 
-    
+    m_FourBar.setIntakeSpeed(-0.6);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    m_FourBar.setFourbarSpeed(-0.62);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_FourBar.setFourbarSpeed(0.0);
+    m_FourBar.setIntakeSpeed(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>0.9){ 
-      return true;
-    }else{
-      return false;
-    }
+    return false;
   }
 }

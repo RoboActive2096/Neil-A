@@ -58,9 +58,9 @@ public class GyroTurn extends CommandBase {
       speed = (error/target)*0.2+0.2;  
     }*/
     if(error > 0){
-      speed = (error/target)*0.2+0.1; 
+      speed = (error/target)*0.2+0.098; 
     }else{
-      speed = (error/target)*-0.2+0.1; 
+      speed = (error/target)*-0.2+0.098; 
     }
 
    if(!direction){

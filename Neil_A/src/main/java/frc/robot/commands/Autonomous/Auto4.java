@@ -28,14 +28,15 @@ public class Auto4 extends SequentialCommandGroup {
    // super(new GyroReset(db),new GyroTurn(db, 20, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 180, false),new openfourBarWhileDriving(db, 4.5, fb), new ClosefourBarWhileDriving(db, -4, fb),new GyroCloseForbarAndShooter(db, fb, sh, 20, false),new parallelShooterWithFourBar(sh,fb,db ,5),new delayAuto(15));
     
    super(new GyroReset(db),
-   new GyroTurn(db, 7, false),
-   new ShooterForSecond(sh,2,0.728,1),
-   new GyroTurn(db, 185, false),
-   new openfourBarWhileDriving(db, 4.5, fb),
+   new GyroTurn(db, 7, false),//Turn from starting position
+   new ShooterForSecond(sh,2,0.728,1),//First shooting
+   new GyroTurn(db, 183, false),//Turning around
+   new openfourBarWhileDriving(db, 4.5, fb),//Collecting
    new GyroReset2(db),
-   new ClosefourBarWhileDriving(db, -3.8, fb),
-   new GyroTurn(db, 158, true),
-   new parallelShooterWithFourBar(sh,fb,db ,5, 0.69),
+   new ClosefourBarWhileDriving(db, -3.7, fb, sh),//Driving backwards to net
+   new GyroTurn(db, 161, true),//Turning to align with net
+   new parallelShooterWithFourBar(sh,fb,db ,5, 0.76),//Shake em' and shoot em'
    new delayAuto(15)); 
   }
 }
+

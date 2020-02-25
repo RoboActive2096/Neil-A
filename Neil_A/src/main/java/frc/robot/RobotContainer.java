@@ -87,7 +87,7 @@ public class RobotContainer {
     m_XController = new XboxController(1);
     m_Joystick = new Joystick(0);
     m_FourBar = new FourBar();
-    m_Shooter = new Shooter();
+    m_Shooter = new Shooter(m_XController);
     m_Climb = new Climb();
     m_Roulette = new Roulette();
     rt = new RelayTest();
@@ -135,17 +135,18 @@ public class RobotContainer {
   private void configureButtonBindings()
   {
 
-    new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarToggle(m_FourBar, FourBarState));
+    new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarToggle(m_FourBar, FourBarState, m_Shooter));
     //new POVButton(m_XController, Constants.XboxButtons.PovButtonUp).whenPressed(new FourBarOpen(m_FourBar));
     //new POVButton(m_XController, Constants.XboxButtons.PovButtonDown).whenPressed(new FourBarClose(m_FourBar));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonRB).whileHeld(new FourBarTurnOtherWay(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonRight).whileHeld(new FourBarOpenAndClose(m_FourBar));
     new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_FourBar));
-    new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
+    //new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
     new JoystickButton(m_Joystick, 2).whenPressed(new Auto1(m_Shooter, m_DriveBase));
     new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightSmall).whenPressed(new RouletteOpen(m_Roulette));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftSmall).whenPressed(new RouletteClose(m_Roulette));
+   // new JoystickButton(m_XController, Constants.XboxButtons.ButtonLB).whileHeld(new Intake(m_FourBar));
   }
 
   public static String getState(){

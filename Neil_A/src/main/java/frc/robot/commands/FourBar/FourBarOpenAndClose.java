@@ -23,7 +23,7 @@ public class FourBarOpenAndClose extends SequentialCommandGroup {
   
   public FourBarOpenAndClose(FourBar fourBar) {
     // Add your commands in the super() call, e.g.
-     super(new FourBarHalfOpen(fourBar), new FourBarHalfClose(fourBar), new delayAuto(0.25),new FourBarHalfOpen(fourBar), new FourBarHalfClose(fourBar), new delayAuto(0.25));
+     super(new FourBarHalfOpen(fourBar), new FourBarHalfClose(fourBar), new delayAuto(0.6),new FourBarHalfOpen(fourBar), new FourBarHalfClose(fourBar), new delayAuto(0.25));
     
   }
 }

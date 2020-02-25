@@ -44,6 +44,9 @@ public class FourBarCloseForAuto extends CommandBase {
   @Override
   public void end(final boolean interrupted) {
     m_FourBar.setFourbarSpeed(0.0);
+    
+    //m_FourBar.setIntakeSpeed(0.9);
+    //time.delay(0.9);
     m_FourBar.setIntakeSpeed(0.0);
 
   }

@@ -17,7 +17,7 @@ public class FourBarTurnOtherWay extends CommandBase {
   FourBar m_fourbar;
   public FourBarTurnOtherWay(FourBar fourbar) {
     m_fourbar = fourbar;
-    addRequirements(m_fourbar);
+  
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,7 +29,7 @@ public class FourBarTurnOtherWay extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_fourbar.setIntakeSpeed(0.5);
+    m_fourbar.setIntakeSpeed(0.9); //TODO: Check if Ok
   }
 
   // Called once the command ends or is interrupted.
