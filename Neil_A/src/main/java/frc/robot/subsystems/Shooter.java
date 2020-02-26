@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-import java.lang.ModuleLayer.Controller;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
