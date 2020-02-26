@@ -27,12 +27,12 @@ public class SystemsCheck extends SequentialCommandGroup {
    */
   public SystemsCheck(DriveBase db, double d, Shooter shooter, Roulette roulette, FourBar fourBar, Climb climb) {
     super(new DriveForDistance(db, d),
-     new DriveForDistance(db, -d),
-     new ShooterForSecond(shooter, 4, 0.728,1),
-     new RouletteClose(roulette),
-     new RouletteOpen(roulette),
-     new RouletteClose(roulette),
-     new FourBarOpen(fourBar),
-     new FourBarClose(fourBar));
+          new DriveForDistance(db, -d),
+          new ShooterForSecond(shooter, 4, 0.728,1),
+          new RouletteClose(roulette),
+          new RouletteOpen(roulette),
+          new RouletteClose(roulette),
+          new FourBarOpen(fourBar),
+          new FourBarClose(fourBar));
   }
 }
