@@ -15,10 +15,8 @@ import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Roulette;
 import frc.robot.subsystems.Shooter;
-import frc.robot.commands.ShooterForSecond;
 import frc.robot.commands.Roulette.*;
 import frc.robot.commands.FourBar.*;
-import frc.robot.commands.Climb.*;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
