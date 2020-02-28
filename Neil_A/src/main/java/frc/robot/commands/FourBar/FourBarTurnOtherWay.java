@@ -29,13 +29,13 @@ public class FourBarTurnOtherWay extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_fourbar.setIntakeSpeed(0.9); //TODO: Check if Ok
+    m_fourbar.setIntakeSpeed(0.0); 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_fourbar.setIntakeSpeed(0.0);
+    
   }
 
   // Returns true when the command should end.

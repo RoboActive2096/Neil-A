@@ -37,10 +37,10 @@ public class FourBarToggle extends CommandBase {
     time.reset();
     time.start();
     if(state == "close"){
-      m_FourBar.setIntakeSpeed(-0.75); 
+      m_FourBar.setIntakeSpeed(-0.9); 
       m_FourBar.setFourbarSpeed(-0.6);
     }else{
-      m_FourBar.setIntakeSpeed(-0.3); 
+      m_FourBar.setIntakeSpeed(-0.9); 
       m_FourBar.setFourbarSpeed(0.6);
       //m_shooter.setDeliveryspeed(-1);
     }
@@ -52,10 +52,10 @@ public class FourBarToggle extends CommandBase {
   public void execute() {
 
     if(state == "close"){
-      m_FourBar.setIntakeSpeed(-0.75); 
+      m_FourBar.setIntakeSpeed(-0.9); 
       m_FourBar.setFourbarSpeed(-0.6);
     }else{
-      m_FourBar.setIntakeSpeed(-0.3); 
+      m_FourBar.setIntakeSpeed(-0.9); 
       m_FourBar.setFourbarSpeed(0.6);
     }
   }
@@ -69,9 +69,10 @@ public class FourBarToggle extends CommandBase {
       state = "open";
     }else{
       state = "close";
-      m_FourBar.setIntakeSpeed(0.0); 
       Timer.delay(0.7);
-      m_shooter.setDeliveryspeed(0.0);
+      //m_FourBar.setIntakeSpeed(0.0); 
+      
+      
     }
   }
 
