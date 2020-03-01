@@ -56,13 +56,13 @@ public class Shooter extends SubsystemBase {
                                             30);
 
 
-  //  spid = new PIDController(0.000009, 0.0001, 0.000);
+     // spid = new PIDController(0.000009, 0.0001, 0.000);
+    // spid = new PIDController()
    // spid.setTolerance(100, 100);
   }
 
   public void setShooterSpeed(double speed){
-
-    
+    //spid = new PIDController(0.7/target, 0.1/target, 0)
     //spid.setSetpoint(14000);
    Shooter.set(ControlMode.PercentOutput, speed);
   /*System.out.println("Valocity: " + Shooter.getSelectedSensorVelocity() + ", Current Percent: " + Shooter.getSupplyCurrent() + " Calculated: " +  spid.calculate(Shooter.getSelectedSensorVelocity()));
