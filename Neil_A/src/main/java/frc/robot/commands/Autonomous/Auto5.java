@@ -8,24 +8,37 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.GyroReset;
+import frc.robot.commands.GyroReset2;
+import frc.robot.commands.GyroTurn;
 import frc.robot.commands.ShooterForSecond;
-import frc.robot.commands.Autonomous.GyroCloseForbarAndShooter;
-import frc.robot.commands.Autonomous.openfourBarWhileDriving;
-import frc.robot.commands.DriveBase.DriveForDistance;
+import frc.robot.commands.FourBar.FourBarWheelsOff;
+import frc.robot.commands.FourBar.FourBarWheelsOn;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Auto5 extends SequentialCommandGroup {
   /**
-   * Creates a new Auto5.
+   * Creates a new Auto4 - same as 3 but one less ball in total.
    */
-  public Auto5(DriveBase m_DriveBase, FourBar m_FourBar, Shooter m_shooter) {
+  public Auto5(Shooter sh,DriveBase db,FourBar fb) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new openfourBarWhileDriving(m_DriveBase, 2, m_FourBar), new GyroCloseForbarAndShooter(m_DriveBase, m_FourBar, m_shooter, 120, false), new DriveForDistance(m_DriveBase, 3), new ShooterForSecond(m_shooter, 3, 0.728,1),new delayAuto(15));
+   // super(new GyroReset(db),new GyroTurn(db, 20, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 180, false),new openfourBarWhileDriving(db, 4.5, fb), new ClosefourBarWhileDriving(db, -4, fb),new GyroCloseForbarAndShooter(db, fb, sh, 20, false),new parallelShooterWithFourBar(sh,fb,db ,5),new delayAuto(15));
+    
+   super(new GyroReset(db),
+         new GyroTurn(db, 6.7, false),//Turn from starting position
+         new ShooterForSecond(sh,2,0.728,1.5),//First shooting
+         new GyroTurn(db, 183, false),//Turning around
+         new openfourBarWhileDriving(db, 4.9, fb),//Collecting
+         new GyroReset2(db),
+         new delayAuto(0.2),
+         new ClosefourBarWhileDriving(db, -3.9, fb),//Driving backwards to net
+         new GyroTurn(db, 160, true),//Turning to align with net
+         new parallelShooterWithFourBar(sh,fb,db ,5, 0.76),//Shake em' and shoot em'
+         new delayAuto(15)
+         ); 
   }
 }
+

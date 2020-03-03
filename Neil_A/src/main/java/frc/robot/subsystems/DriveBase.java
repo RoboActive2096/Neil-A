@@ -44,13 +44,14 @@ public class DriveBase extends SubsystemBase {
 
   public void calirationGyro(){
     //gyro.calibrate();
-    //ahrs.calibrate();
+   // ahrs.calibrate();
   
   }
 
 
   public double getGyroAngle(){
     if(!ahrs.isConnected()){
+      System.out.println("NAVX DISCONNECTED");
       return gyro.getAngle();
     }else{
      return ahrs.getAngle();

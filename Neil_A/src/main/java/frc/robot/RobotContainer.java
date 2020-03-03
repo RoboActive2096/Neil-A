@@ -36,6 +36,7 @@ import frc.robot.commands.VisionAutoAll;
 import frc.robot.commands.logGlobal;
 import frc.robot.commands.turnOffFlash;
 import frc.robot.commands.turnOnFlash;
+import frc.robot.commands.vision2;
 import frc.robot.commands.Autonomous.Auto1;
 import frc.robot.commands.Autonomous.Auto2;
 import frc.robot.commands.Autonomous.Auto3;
@@ -143,11 +144,14 @@ public class RobotContainer {
     new POVButton(m_XController, Constants.XboxButtons.PovButtonLeft).whenPressed(new FourBarHalfClose(m_FourBar));
     //new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
     new JoystickButton(m_Joystick, 2).whenPressed(new Auto1(m_Shooter, m_DriveBase));
-    new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
+    //new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
+    new JoystickButton(m_Joystick, 1).whenPressed(new vision2(m_DriveBase, m_Shooter, m_Joystick));
+   //new JoystickButton(m_Joystick, 11).whenPressed(new Angle(m_Shooter, m_Joystick));
+   // new JoystickButton(m_Joystick, 11).whenPressed(new frc.robot.commands.Vision(m_DriveBase, m_Shooter, m_Joystick));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightSmall).whenPressed(new RouletteOpen(m_Roulette));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftSmall).whenPressed(new RouletteClose(m_Roulette));
     
-   // new JoystickButton(m_XController, Constants.XboxButtons.ButtonLB).whileHeld(new Intake(m_FourBar));
+   new JoystickButton(m_XController, Constants.XboxButtons.ButtonLB).whileHeld(new Intake(m_FourBar));
   }
 
   public static String getState(){

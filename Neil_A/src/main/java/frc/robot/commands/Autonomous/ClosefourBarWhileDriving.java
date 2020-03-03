@@ -23,10 +23,10 @@ public class ClosefourBarWhileDriving extends ParallelCommandGroup {
    */
   public 
   
-  ClosefourBarWhileDriving(DriveBase db,double distance,FourBar fb, Shooter shooter) {
+  ClosefourBarWhileDriving(DriveBase db,double distance,FourBar fb) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     
-    super(new DriveForDistance(db, distance),new FourBarCloseForAuto(fb), new TurnDelivery(shooter));
+    super(new DriveForDistance(db, distance),new FourBarCloseForAuto(fb));
   }
 }

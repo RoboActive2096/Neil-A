@@ -44,6 +44,9 @@ public class Shooter extends SubsystemBase {
     Angle.configFactoryDefault();
     m_xController = xController;
     Angle.setNeutralMode(NeutralMode.Brake);
+    Angle.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,
+                                            1, 
+                                            30);
     time = new Timer();
     time.stop();
     time.reset();
@@ -99,16 +102,17 @@ public class Shooter extends SubsystemBase {
       speed=0.0;
       m_xController.setRumble(RumbleType.kLeftRumble, 0.7);
       m_xController.setRumble(RumbleType.kRightRumble, 0.7);
+      Angle.setSelectedSensorPosition(0);
     }else if(speed>0 && !minDigitalInput.get()){ // was with ! -- 21.02.2020
       System.out.println("done");
       speed=0.0;
-      setEncoderAngleChanger(0);
       
       m_xController.setRumble(RumbleType.kLeftRumble, 0.7);
       m_xController.setRumble(RumbleType.kRightRumble, 0.7);
     }
     else
     {
+     // System.out.println("ANGLE POS: " + getEncoderAngleChanger());
       m_xController.setRumble(RumbleType.kLeftRumble, 0.0);
       m_xController.setRumble(RumbleType.kRightRumble, 0.0);
     }

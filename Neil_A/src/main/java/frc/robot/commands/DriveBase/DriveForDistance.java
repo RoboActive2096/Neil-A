@@ -123,11 +123,11 @@ public class DriveForDistance extends CommandBase {
     
   public void brake(){
     if(revrse){
-      m_DriveBase.setRight(-0.1);
-      m_DriveBase.setLeft(-0.1);
+     m_DriveBase.setRight(-0.1);
+     m_DriveBase.setLeft(-0.1);
     }else{
-      m_DriveBase.setRight(0.1);
-      m_DriveBase.setLeft(0.1);
+     m_DriveBase.setRight(0.1);
+     m_DriveBase.setLeft(0.1);
     }
   }
   

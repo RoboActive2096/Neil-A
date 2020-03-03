@@ -29,7 +29,7 @@ public class Intake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_FourBar.setIntakeSpeed(0.0);
+    m_FourBar.setIntakeSpeed(-0.9);
   }
 
   // Called once the command ends or is interrupted.

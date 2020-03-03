@@ -45,9 +45,10 @@ public class ShooterForSecond extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(time.get()>0.8){
+    if(time.get()>0.5){
       m_Shooter.setLoadingSpeed(0.9);
-      m_Shooter.setDeliveryspeed(-0.9);
+      time.delay(0.1);
+      m_Shooter.setDeliveryspeed(0.5);
     }
     m_Shooter.setShooterSpeed(speed);
   }
