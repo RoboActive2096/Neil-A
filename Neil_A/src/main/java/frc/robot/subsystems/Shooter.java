@@ -34,7 +34,7 @@ public class Shooter extends SubsystemBase {
   VictorSPX Delivery = new VictorSPX(Constants.ShootersPorts.Delivery);
   DigitalInput maxDigitalInput = new DigitalInput(0);
   DigitalInput minDigitalInput = new DigitalInput(1);
-  Timer time;
+  Timer time = new Timer();
 
   PIDController spid;
   XboxController m_xController;
@@ -47,10 +47,6 @@ public class Shooter extends SubsystemBase {
     Angle.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,
                                             1, 
                                             30);
-    time = new Timer();
-    time.stop();
-    time.reset();
-
     Shooter.configFactoryDefault();
 
 		/* Config sensor used for Primary PID [Velocity] */
@@ -65,22 +61,27 @@ public class Shooter extends SubsystemBase {
   }
 
   public void setShooterSpeed(double speed){
-    //spid = new PIDController(0.7/target, 0.1/target, 0)
+    Shooter.set(ControlMode.PercentOutput, speed);
+    
+    //spid = new PIDController(0.9999/(14000 * 0.40), 0.2/(14000 * 0.60), 0.1/14000);
     //spid.setSetpoint(14000);
-   Shooter.set(ControlMode.PercentOutput, speed);
-  /*System.out.println("Valocity: " + Shooter.getSelectedSensorVelocity() + ", Current Percent: " + Shooter.getSupplyCurrent() + " Calculated: " +  spid.calculate(Shooter.getSelectedSensorVelocity()));
-    if(speed == 0.0){
+    //spid.setTolerance(100, 100);
+    //System.out.println("Valocity: " + Shooter.getSelectedSensorVelocity() + ", Current Percent: " + Shooter.getSupplyCurrent() + " Calculated: " +  spid.calculate(Shooter.getSelectedSensorVelocity()));
+    if(speed == 0.0)
+    {
       stop();
-    }else{
-      double kF = 0.0;
-      double xs = spid.calculate(Shooter.getSelectedSensorVelocity());
-     
-      Shooter.set(ControlMode.PercentOutput, xs + kF);
-    }*/
+    }
+    // else
+    // {
+    //   double kF = 0.0;
+    //   double xs = spid.calculate(Shooter.getSelectedSensorVelocity());
+    //   Shooter.set(ControlMode.PercentOutput, xs + kF);
+    // } 
+    
   }
   public void stop(){
     Shooter.set(ControlMode.PercentOutput, 0.0);
-    //shooterPIDClass.stopMotor();
+    //newShooterPID.stopMotor();
   }
 
   public void setLoadingSpeed(double speed){
