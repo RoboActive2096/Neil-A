@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -24,14 +25,18 @@ public class GyroTurn2 extends CommandBase {
   double dirdir = 1;
   double speed;
   PIDController m_pid;
+  Timer time;
+  Joystick m_Joystick;
   
-  public GyroTurn2(DriveBase driveBase,double tar,boolean dir) {
+  public GyroTurn2(DriveBase driveBase,double tar,boolean dir, Joystick j) {
     /*
       if dir is equal to false its to the left direction
     */
+    m_Joystick = j;         
     m_DriveBase = driveBase;
     target = tar;
     direction = dir;
+    time = new Timer();
     m_pid = new PIDController(0.0065, 0.0033, 0.0);
     addRequirements(driveBase);
   }
@@ -39,19 +44,30 @@ public class GyroTurn2 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    driveTry(0.0, 0.0);
+    time.stop();
+    time.reset();
+    time.start();
     m_DriveBase.resetGyro();
-    //target = Math.abs(target);
+    m_DriveBase.resetGyro();
+    m_DriveBase.resetGyro();
+    m_DriveBase.resetGyro();
+    m_DriveBase.resetGyro();
+    m_DriveBase.resetGyro();
+    m_DriveBase.resetGyro();
+
+    target = Math.abs(target);
+    m_pid.setTolerance(3);
+    m_pid.setSetpoint(target);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    target = 60;
+    
     
     now = Math.abs(m_DriveBase.getGyroAngle());
     System.out.println(now);
-    m_pid.setTolerance(2);
-    m_pid.setSetpoint(target);
     double d = m_DriveBase.getGyroAngle();
     System.out.println("PID Calc: " + -1*m_pid.calculate(d) + " gyro: " + d);
     driveTry(-1*m_pid.calculate(d), 0.0);
@@ -113,17 +129,20 @@ public class GyroTurn2 extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    brake();
-    Timer.delay(0.05);
+   // brake();
+    
 
-    m_DriveBase.setLeft(0.0);
-    m_DriveBase.setRight(0.0);
+    driveTry(0.0, 0.0);
+  
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(target - m_DriveBase.getGyroAngle()) < 2){
+    if(Math.abs(target - m_DriveBase.getGyroAngle()) < 1&& time.get()>2){
+      return true;
+    }
+    if(m_Joystick.getRawButton(12)){
       return true;
     }
     return false;

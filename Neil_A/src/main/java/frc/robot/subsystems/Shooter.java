@@ -63,20 +63,28 @@ public class Shooter extends SubsystemBase {
   public void setShooterSpeed(double speed){
     Shooter.set(ControlMode.PercentOutput, speed);
     
-    //spid = new PIDController(0.9999/(14000 * 0.40), 0.2/(14000 * 0.60), 0.1/14000);
-    //spid.setSetpoint(14000);
-    //spid.setTolerance(100, 100);
-    //System.out.println("Valocity: " + Shooter.getSelectedSensorVelocity() + ", Current Percent: " + Shooter.getSupplyCurrent() + " Calculated: " +  spid.calculate(Shooter.getSelectedSensorVelocity()));
+    /*spid = new PIDController(0.9/14000, 0.008, 0.0);
+    
+    spid.enableContinuousInput(0, 15000);
+   // spid.setIntegratorRange(-1, 1);
+    spid.setSetpoint(14000);
+    spid.setTolerance(100, 100);
+    System.out.println("Valocity: " + Shooter.getSelectedSensorVelocity() + ", Current Percent: " + Shooter.getSupplyCurrent() + " Calculated: " +  spid.calculate(Shooter.getSelectedSensorVelocity()));
     if(speed == 0.0)
     {
       stop();
     }
-    // else
-    // {
-    //   double kF = 0.0;
-    //   double xs = spid.calculate(Shooter.getSelectedSensorVelocity());
-    //   Shooter.set(ControlMode.PercentOutput, xs + kF);
-    // } 
+     else
+     {
+       double kF = 0.5;
+       double xs = spid.calculate(Shooter.getSelectedSensorVelocity());
+       if(xs + kF > 1){
+        Shooter.set(ControlMode.PercentOutput, 1);
+       }else{
+         
+       Shooter.set(ControlMode.PercentOutput, xs + kF);
+       }
+     } */
     
   }
   public void stop(){

@@ -64,13 +64,14 @@ public class FourBarToggle extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_FourBar.setFourbarSpeed(0.0);
+
     
     if(state == "close"){
       state = "open";
     }else{
       state = "close";
-      Timer.delay(0.7);
-      //m_FourBar.setIntakeSpeed(0.0); 
+      Timer.delay(1.5);
+      m_FourBar.setIntakeSpeed(0.0); 
       
       
     }
