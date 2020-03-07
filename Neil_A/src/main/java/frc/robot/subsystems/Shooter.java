@@ -35,6 +35,8 @@ public class Shooter extends SubsystemBase {
   DigitalInput maxDigitalInput = new DigitalInput(0);
   DigitalInput minDigitalInput = new DigitalInput(1);
   Timer time = new Timer();
+  
+  boolean reachedAMax;
 
   PIDController spid;
   XboxController m_xController;
@@ -48,6 +50,8 @@ public class Shooter extends SubsystemBase {
                                             1, 
                                             30);
     Shooter.configFactoryDefault();
+    
+    reachedAMax = false;
 
 		/* Config sensor used for Primary PID [Velocity] */
     Shooter.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,
@@ -108,19 +112,20 @@ public class Shooter extends SubsystemBase {
   
   public void setAngelspeed(double speed){
     if(speed<0 && !maxDigitalInput.get()){ // was with ! -- 21.02.2020
+      reachedAMax = true;
       speed=0.0;
       m_xController.setRumble(RumbleType.kLeftRumble, 0.7);
       m_xController.setRumble(RumbleType.kRightRumble, 0.7);
       Angle.setSelectedSensorPosition(0);
     }else if(speed>0 && !minDigitalInput.get()){ // was with ! -- 21.02.2020
-      System.out.println("done");
+      reachedAMax = true;
       speed=0.0;
-      
       m_xController.setRumble(RumbleType.kLeftRumble, 0.7);
       m_xController.setRumble(RumbleType.kRightRumble, 0.7);
     }
     else
     {
+      reachedAMax = false;
      // System.out.println("ANGLE POS: " + getEncoderAngleChanger());
       m_xController.setRumble(RumbleType.kLeftRumble, 0.0);
       m_xController.setRumble(RumbleType.kRightRumble, 0.0);

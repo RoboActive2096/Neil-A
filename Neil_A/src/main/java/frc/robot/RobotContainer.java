@@ -147,7 +147,7 @@ public class RobotContainer {
     //new JoystickButton(m_XController, Constants.XboxButtons.ButtonB).whileHeld(new IntakeRun(m_XController,m_FourBar));
     //new JoystickButton(m_Joystick, 2).whenPressed(new Auto1(m_Shooter, m_DriveBase));
     //new JoystickButton(m_Joystick, 1).whenPressed(new VisionAutoAll(rt, m_vision, m_Joystick, m_DriveBase, m_Shooter, m_FourBar, m_XController));
-    new JoystickButton(m_Joystick, 1).whenPressed(new vision2(m_DriveBase, m_Shooter, m_Joystick));
+    new JoystickButton(m_Joystick, 1).whenPressed(new vision2(m_DriveBase, m_Shooter, m_Joystick, m_XController));
    // new JoystickButton(m_Joystick, 11).whenPressed(new frc.robot.commands.Vision(m_DriveBase, m_Shooter, m_Joystick));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonRightSmall).whenPressed(new RouletteOpen(m_Roulette));
     new JoystickButton(m_XController, Constants.XboxButtons.ButtonLeftSmall).whenPressed(new RouletteClose(m_Roulette));

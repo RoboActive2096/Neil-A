@@ -12,9 +12,14 @@ import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.controller.*;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import java.sql.Time;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -45,16 +50,18 @@ public class vision2 extends CommandBase {
   boolean isFinished;
   DriveBase m_DriveBase;
   Shooter m_Shooter;
+  
+  XboxController m_xController;
 
   PIDController pidc;
   double centerDATA; 
   double target;
   double s;
-  public vision2(DriveBase db, Shooter shooter, Joystick j) {
+  public vision2(DriveBase db, Shooter shooter, Joystick j, XboxController x_controller) {
     joy = j;
     m_DriveBase = db;
     m_Shooter = shooter;
-
+    m_xController = x_controller;
     time = new Timer();
 
     inst = NetworkTableInstance.getDefault();
@@ -87,6 +94,7 @@ public class vision2 extends CommandBase {
    //idc = new PIDController(0.0005*0.4, 0.12*0.005/2.5, 4*0.0005*2.5/40); 
    //pidc = new PIDController(0.00045, 0.00021, 0.0003);
    pidc = new PIDController(0.00045, 0.00026, 0.0003);
+   
    time.reset();
     time.stop();
     time.start();
@@ -196,6 +204,11 @@ public class vision2 extends CommandBase {
        }
     }
     m_Shooter.setPointToAngle(pos);
+    
+    m_xController.setRumble(RumbleType.kLeftRumble, 0.7);
+    m_xController.setRumble(RumbleType.kRightRumble, 0.7);    
+    Timer.delay(0.2);
+
     //int pos = -45 * (int)width2/2 + 7850; // int pos = -45 * (int)width + 6980;
     /*int pos = 0;
     if (y > 100){

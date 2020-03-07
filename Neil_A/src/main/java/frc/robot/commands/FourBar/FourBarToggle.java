@@ -25,8 +25,8 @@ public class FourBarToggle extends CommandBase {
     m_FourBar=fourBar;
     time = new Timer();
     m_shooter = shooter;
-    addRequirements(fourBar);
-    addRequirements(m_shooter);
+    addRequirements(m_FourBar);
+    //addRequirements(m_shooter); - Cancelled Shooter cause
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -70,9 +70,8 @@ public class FourBarToggle extends CommandBase {
       state = "open";
     }else{
       state = "close";
-      Timer.delay(1.5);
+      //Timer.delay(1.5);
       m_FourBar.setIntakeSpeed(0.0); 
-      
       
     }
   }
