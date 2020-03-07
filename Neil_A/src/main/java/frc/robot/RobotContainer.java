@@ -42,6 +42,7 @@ import frc.robot.commands.Autonomous.Auto1;
 import frc.robot.commands.Autonomous.Auto2;
 import frc.robot.commands.Autonomous.Auto3;
 import frc.robot.commands.Autonomous.Auto4;
+import frc.robot.commands.Autonomous.Auto6;
 import frc.robot.commands.GyroTurn2;
 import frc.robot.commands.Climb.*;
 import frc.robot.commands.Roulette.*;
@@ -103,6 +104,7 @@ public class RobotContainer {
     autonomousChooserComboBox.addOption("Auto 2", null); //Name of option - please keep the null
     autonomousChooserComboBox.addOption("Auto 3", null); //Name of option - please keep the null
     autonomousChooserComboBox.addOption("Auto 4", null); //Name of option - please keep the null
+    autonomousChooserComboBox.addOption("Auto 6", null); //Name of option - please keep the null
     autonomousChooserComboBox.addOption("Systems Check", null);
     Shuffleboard.getTab("AutoChoose")
       .add("AutoChooserBox", autonomousChooserComboBox);
@@ -193,7 +195,9 @@ public class RobotContainer {
         return (new Auto4(m_Shooter, m_DriveBase,m_FourBar));
       case "Systems Check":
         return (new SystemsCheck(m_DriveBase, 1.2, m_Shooter, m_Roulette, m_FourBar, m_Climb));
-      default:
+      case "Auto 6":
+        return (new Auto6(m_Shooter, m_DriveBase, m_FourBar, m_Joystick, m_XController));
+        default:
         return null;
     }
     //Was by default returning auto4
