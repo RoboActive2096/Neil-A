@@ -2,9 +2,10 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-public class ShooterPID{
+class ShooterPID{
 
     
 	public final double kP;
@@ -70,6 +71,6 @@ public class ShooterPID{
     }
 
     public void logOutput(){
-        System.out.println("Velocity: " + talon.getSelectedSensorVelocity() + " AMP: ");
+        System.out.println("Velocity: " + talon.getSelectedSensorVelocity());
     }
 }

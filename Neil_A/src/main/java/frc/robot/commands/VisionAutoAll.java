@@ -27,10 +27,7 @@ public class VisionAutoAll extends SequentialCommandGroup {
   public VisionAutoAll(RelayTest rt,Vision m_vision,Joystick m_Joystick,DriveBase m_DriveBase,Shooter m_Shooter,FourBar m_FourBar,XboxController m_XController) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    //super(new turnOnFlash(rt),new VisionCommand(m_vision, m_Joystick, m_DriveBase, m_Shooter,m_FourBar, m_XController),new turnOffFlash(rt));
-    super(new VisionCommand(m_vision, m_Joystick, m_DriveBase, m_Shooter,m_FourBar, m_XController));
-    
-    
+    super(new turnOnFlash(rt),new VisionCommand(m_vision, m_Joystick, m_DriveBase, m_Shooter,m_FourBar, m_XController),new turnOffFlash(rt));
     /*
     System.out.println("starting flash");
     ;

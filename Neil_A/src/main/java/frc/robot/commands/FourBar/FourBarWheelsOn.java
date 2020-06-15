@@ -24,7 +24,7 @@ public class FourBarWheelsOn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_FourBar.setIntakeSpeed(0.8);
+    m_FourBar.setIntakeSpeed(-0.8);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

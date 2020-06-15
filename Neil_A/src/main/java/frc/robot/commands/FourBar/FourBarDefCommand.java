@@ -34,13 +34,13 @@ public class FourBarDefCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    if(m_xController.getRawButton(Constants.XboxButtons.ButtonRB)){
+    /*
+    if(m_xController.getRawButton(Constants.XboxButtons.ButtonB)){
       m_fourbar.setIntakeSpeed(0.5);
     }else{
       m_fourbar.setIntakeSpeed(0.0);
     }
-    
+    */
   }
 
   // Called once the command ends or is interrupted.

@@ -8,7 +8,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -18,7 +21,6 @@ public class Climb extends SubsystemBase {
    */
   VictorSPX Elevators = new VictorSPX(Constants.ClimbPorts.Elevators);
   VictorSPX winch = new VictorSPX(Constants.ClimbPorts.winch);
-  //DigitalInput climbLimit = new DigitalInput(Constants.ClimbPorts.limitClimb);
   public Climb() {
 
   }

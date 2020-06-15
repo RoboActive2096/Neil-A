@@ -30,13 +30,13 @@ public class turnOffFlash extends CommandBase {
   @Override
   public void initialize() {
     m_RelayTest.setRelayOff();
-    Timer.delay(delay);
+    time.delay(delay);
     m_RelayTest.setRelayOn();
-    Timer.delay(delay);
+    time.delay(delay);
     m_RelayTest.setRelayOff();
-    Timer.delay(delay);
+    time.delay(delay);
     m_RelayTest.setRelayOn();
-    Timer.delay(delay);
+    time.delay(delay);
     m_RelayTest.setRelayOff();
   }
 

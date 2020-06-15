@@ -24,16 +24,23 @@ public class Vision extends SubsystemBase {
   public NetworkTableEntry done;
   public NetworkTableEntry width;
   public NetworkTableEntry angle;
-  
+
   public Vision(DriveBase driveBase) {
     m_DriveBase = driveBase;
     inst = NetworkTableInstance.getDefault();
-    table = inst.getTable("SmartDashboard");
-    xCenter = table.getEntry("center");
+    //table = inst.getTable("SmartDashboard");
+    table = NetworkTableInstance.getDefault().getTable("limelight");
+    xCenter = table.getEntry("tx");
+    done = table.getEntry("done");
+    width = table.getEntry("width");
+    angle = table.getEntry("ty");
+
+    /*
+     xCenter = table.getEntry("center");
     done = table.getEntry("done");
     width = table.getEntry("width");
     angle = table.getEntry("angle");
-
+    */
   }
 
   

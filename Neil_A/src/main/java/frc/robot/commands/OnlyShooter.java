@@ -5,9 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Shooter;
+package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
@@ -15,41 +16,51 @@ public class OnlyShooter extends CommandBase {
   /**
    * Creates a new OnlyShooter.
    */
-  Timer time;
   Shooter m_Shooter;
-  public OnlyShooter(Shooter shooter) {
-    m_Shooter = shooter;
-    time = new Timer();
-    addRequirements(shooter);
-        // Use addRequirements() here to declare subsystem dependencies.
+  XboxController m_XController;
+  Joystick m_jJoystick;
+  public OnlyShooter(Shooter sh, XboxController xb, Joystick jy) {
+    m_Shooter = sh;
+    m_XController = xb;
+    m_jJoystick = jy;
+    addRequirements(sh);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    time.stop();
-    time.reset();
-    time.start();
-    m_Shooter.setShooterSpeed(0.728);
+    m_Shooter.setShooterSpeed(0.75);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(m_XController.getRawButton(2)){
+      m_Shooter.setLoadingSpeed(0.9);
+      m_Shooter.setDeliveryspeed(0.6);
+    }else if(m_XController.getRawButton(3)){
+      m_Shooter.setDeliveryspeed(-0.6);
+    }else{
+      m_Shooter.setLoadingSpeed(0.0);
+      m_Shooter.setDeliveryspeed(0.0);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Shooter.setShooterSpeed(0.728);
+    m_Shooter.setLoadingSpeed(0.0);
+    m_Shooter.setDeliveryspeed(0.0);
+    m_Shooter.setShooterSpeed(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>3){
-      return true;
-    }
+    if(m_jJoystick.getRawAxis(1)>0.1 || m_jJoystick.getRawAxis(1)<-0.1){
+    return true;
+    }else{
     return false;
+    }
   }
 }

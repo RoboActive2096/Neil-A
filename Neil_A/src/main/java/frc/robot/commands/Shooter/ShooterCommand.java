@@ -41,34 +41,31 @@ public class ShooterCommand extends CommandBase {
     SmartDashboard.putNumber("testangle", angle);
 
     if(m_xController.getRawAxis(3)>0.2){
-     m_Shooter.setShooterSpeed(0.72);//0.728 
+     m_Shooter.setShooterSpeed(0.728);//0.728 
     }else{
       m_Shooter.setShooterSpeed(0.0);
     }
 
     if(m_xController.getRawButton(2)){
-      m_Shooter.setLoadingSpeed(0.91);
-      m_Shooter.setDeliveryspeed(0.5);
-    }else if(m_xController.getRawButton(4)){
-      m_Shooter.setLoadingSpeed(0.91);
+      m_Shooter.setLoadingSpeed(0.9);
+      m_Shooter.setDeliveryspeed(0.6);
     }else if(m_xController.getRawButton(3)){
-      m_Shooter.setDeliveryspeed(-0.5);
+      m_Shooter.setDeliveryspeed(-0.6);
     }else{
       m_Shooter.setLoadingSpeed(0.0);
       m_Shooter.setDeliveryspeed(0.0);
     }
 
     if(m_xController.getRawAxis(1)<-0.2){
-        m_Shooter.setAngelspeed(0.55);
+        m_Shooter.setAngelspeed(0.35);
     }else if(m_xController.getRawAxis(1)>0.2){
-      m_Shooter.setAngelspeed(-0.55);
+      m_Shooter.setAngelspeed(-0.35);
     }else{
         m_Shooter.setAngelspeed(0.0);
     }
    
     if(m_Joystick.getRawButton(7)){
       m_Shooter.setEncoderAngleChanger(0);
-    // m_Shooter.setPointToAngle(4000);
     }
 
   }

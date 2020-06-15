@@ -17,21 +17,18 @@ public class GyroReset extends CommandBase {
   DriveBase m_DriveBase;
   public GyroReset(DriveBase driveBase) {
     m_DriveBase = driveBase;
-    addRequirements(driveBase);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     m_DriveBase.resetGyro();
-    
   }
 
   // Called once the command ends or is interrupted.

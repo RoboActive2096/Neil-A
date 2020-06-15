@@ -5,26 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Autonomous;
+package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.GyroTurn;
-import frc.robot.commands.FourBar.FourBarClose;
-import frc.robot.commands.Shooter.OnlyShooter;
+import frc.robot.commands.Autonomous.Auto4;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Vision;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class GyroCloseForbar extends ParallelCommandGroup {
+public class Auot5 extends ParallelCommandGroup {
   /**
-   * Creates a new GyroCloseForbarAndShooter.
+   * Creates a new Auot5.
    */
-  public GyroCloseForbar(DriveBase m_Drivebase, FourBar m_fourbar, Shooter m_shooter, double angle, boolean right) {
+  public Auot5(Shooter sh,DriveBase db,FourBar fb, Vision vision, Joystick joystick, DriveBase m_DriveBase, XboxController xbox) {
     // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());super();
-    super(new GyroTurn(m_Drivebase, angle, right), new FourBarClose(m_fourbar));
+    super(new Auto4(sh,db,fb,vision,joystick,m_DriveBase,xbox), new OnlyYeri(sh));
   }
 }

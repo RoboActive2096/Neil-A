@@ -5,42 +5,60 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.FourBar;
+package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.FourBar;
+import frc.robot.subsystems.Shooter;
 
-public class FourBarTurnOtherWay extends CommandBase {
+public class OnlyDelivery extends CommandBase {
   /**
-   * Creates a new FourBarTurnOtherWay.
+   * Creates a new OnlyDelivery.
    */
-  FourBar m_fourbar;
-  public FourBarTurnOtherWay(FourBar fourbar) {
-    m_fourbar = fourbar;
-  
+  Timer time;
+  Shooter m_Shooter;
+  double timer;
+  public OnlyDelivery(Shooter shooter, double timedely) {
+    time = new Timer();
+    m_Shooter = shooter;
+    timer = timedely;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    time.stop();
+    time.reset();
+    time.start();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_fourbar.setIntakeSpeed(0.0); 
+    m_Shooter.setShooterSpeed(0.728);
+    if(time.get()>1){
+    m_Shooter.setDeliveryspeed(0.6);
+    m_Shooter.setLoadingSpeed(0.8);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+    m_Shooter.setDeliveryspeed(0.0);
+    m_Shooter.setLoadingSpeed(0.0);
+    m_Shooter.setShooterSpeed(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(time.get()>timer){
+      return true;
+    }
+    
     return false;
   }
 }

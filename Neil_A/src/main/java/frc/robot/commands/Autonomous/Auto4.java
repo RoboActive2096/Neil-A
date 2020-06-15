@@ -7,39 +7,42 @@
 
 package frc.robot.commands.Autonomous;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.GyroReset;
-import frc.robot.commands.GyroReset2;
-import frc.robot.commands.GyroTurn2;
 import frc.robot.commands.GyroTurn;
+import frc.robot.commands.GyroWithClose;
+import frc.robot.commands.LimeLightAuto;
+import frc.robot.commands.LimeLightWithoutShooter;
 import frc.robot.commands.ShooterForSecond;
+import frc.robot.commands.DriveBase.DriveForDistance;
+import frc.robot.commands.FourBar.FourBarClose;
+import frc.robot.commands.FourBar.FourBarOpen;
 import frc.robot.commands.FourBar.FourBarWheelsOff;
 import frc.robot.commands.FourBar.FourBarWheelsOn;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
-
+import frc.robot.subsystems.Vision;
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Auto4 extends SequentialCommandGroup {
   /**
-   * Creates a new Auto4 - same as 3 but one less ball in total.
+   * Creates a new Auto4.
    */
-  public Auto4(Shooter sh,DriveBase db,FourBar fb) {
+  public Auto4(Shooter sh,DriveBase db,FourBar fb, Vision vision, Joystick joystick, DriveBase m_DriveBase, XboxController xbox ) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-   // super(new GyroReset(db),new GyroTurn(db, 20, false),new ShooterForSecond(sh,2,0.728,1),new GyroTurn(db, 180, false),new openfourBarWhileDriving(db, 4.5, fb), new ClosefourBarWhileDriving(db, -4, fb),new GyroCloseForbarAndShooter(db, fb, sh, 20, false),new parallelShooterWithFourBar(sh,fb,db ,5),new delayAuto(15));
+    super(new GyroReset(db),
+     new LimeLightWithoutShooter(vision, joystick, m_DriveBase, sh, fb, xbox),
+     new GyroTurn(db, 169, false),
+     new GyroReset(db),
+     new openfourBarWhileDriving(db, 3.9, fb),
+     new GyroWithClose(db, fb),
+     new DriveForDistance(db, 2),
+     new LimeLightAuto(vision, joystick, m_DriveBase, sh, fb, xbox));
     
-   super(new GyroReset(db),
-         new GyroTurn(db, 6.5, false),//Turn from starting position
-         new ShooterForSecond(sh,2,0.728,1.5),//First shooting
-         new GyroTurn(db, 183, false),//Turning around
-         new openfourBarWhileDriving(db, 4.9, fb),//Collecting
-         new GyroReset2(db),
-         new delayAuto(0.2),
-         new ClosefourBarWhileDriving(db, -3.9, fb),//Driving backwards to net
-         new GyroTurn(db, 160, true),//Turning to align with net
-         new parallelShooterWithFourBar(sh,fb,db ,5, 0.76),//Shake em' and shoot em'
-         new delayAuto(15)
-         ); 
   }
 }
-

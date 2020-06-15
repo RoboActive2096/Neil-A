@@ -6,6 +6,7 @@
 package frc.robot.commands.DriveBase;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveBase;
@@ -37,6 +38,7 @@ public class ArcadeDrive extends CommandBase {
   public void execute()
   {
     SmartDashboard.putNumber("left side encoder", m_dBase.getEncoderAvgLeftSide());
+    
     SmartDashboard.putNumber("right side encoder", m_dBase.getEncoderAvgRightSide());
     SmartDashboard.putNumber("avg two side encoder", m_dBase.AvgTwoSidesEncoder());
     SmartDashboard.putNumber("Gyro Angle", m_dBase.getGyroAngle());
@@ -45,7 +47,6 @@ public class ArcadeDrive extends CommandBase {
       m_dBase.resetGyro();
       m_dBase.calirationGyro();
     }
-    
     final double x = -getX() * 0.9;
     final double y = getY() * 0.9;
     driveTry(x, y);

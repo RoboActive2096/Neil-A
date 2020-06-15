@@ -5,58 +5,40 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Climb;
+package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Climb;
+import frc.robot.subsystems.Shooter;
 
-public class CloseElevatorForSeconds extends CommandBase {
+public class OnlyYeri extends CommandBase {
   /**
-   * Creates a new useElevatorsForSeconds.
+   * Creates a new OnlyYeri.
    */
-  Climb m_climb;
-  Timer time;
-  double timeToFinish;
-
-  public CloseElevatorForSeconds(Climb climb, double seconds) {
-    timeToFinish = seconds;
-    m_climb = climb;
-    time = new Timer();
-    addRequirements(m_climb);
+  Shooter m_shooter;
+  public OnlyYeri(Shooter shooter) {
+    m_shooter =shooter;
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    time.stop();
-    time.reset();
-    time.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climb.setElevators(-0.4);
+    m_shooter.setShooterSpeed(0.728);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_climb.setElevators(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get() > timeToFinish)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-    
+    return false;
   }
 }

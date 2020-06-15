@@ -5,25 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.FourBar;
+package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.Autonomous.delayAuto;
-import frc.robot.commands.FourBar.FourBarHalfClose;
-import frc.robot.commands.FourBar.FourBarHalfOpen;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.FourBar.FourBarCloseForAuto;
+import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.FourBar;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class FourBarOpenAndClose extends SequentialCommandGroup {
+public class GyroWithClose extends ParallelCommandGroup {
   /**
-   * Creates a new FourBarOpenAndClose.
+   * Creates a new GyroWithClose.
    */
-  
-  public FourBarOpenAndClose(FourBar fourBar) {
-    // Add your commands in the super() call, e.g.
-     super(new FourBarHalfOpen(fourBar), new FourBarHalfClose(fourBar), new delayAuto(0.6),new FourBarHalfOpen(fourBar), new FourBarHalfClose(fourBar), new delayAuto(0.25));
-    
+  public GyroWithClose(DriveBase m_DriveBase, FourBar fourBar) {
+    super(new GyroTurn(m_DriveBase, 165, true), new FourBarCloseForAuto(fourBar));
   }
 }

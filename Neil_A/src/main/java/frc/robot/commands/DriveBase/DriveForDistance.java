@@ -7,6 +7,7 @@
 
 package frc.robot.commands.DriveBase;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -42,11 +43,9 @@ public class DriveForDistance extends CommandBase {
     time.stop();
     time.reset();
     time.start();
-    Timer.delay(0.02);
     m_DriveBase.setRight(0.0);
     m_DriveBase.setLeft(0.0);
     specialResetEncoder();
-    Timer.delay(0.02);
 
     System.out.println("-----------done init-----------");
 
@@ -87,9 +86,9 @@ public class DriveForDistance extends CommandBase {
     spd = error/Math.abs(this.m_distance);
 
     if(revrse){
-      spd=spd*0.22+0.3;
+      spd=spd*0.22+0.22;
     }else{
-      spd=-spd*0.22-0.3;
+      spd=-spd*0.22-0.22;
     }
 
     System.out.println(error);
@@ -101,7 +100,7 @@ public class DriveForDistance extends CommandBase {
       m_DriveBase.setRight(spd);
       m_DriveBase.setLeft(spd);
     }
-    Timer.delay(0.02);
+    time.delay(0.02);
     System.out.println("-----------done execute-----------");
 
   }
@@ -113,7 +112,7 @@ public class DriveForDistance extends CommandBase {
     brake();
     System.out.println("-----------end brake-----------");
 
-    Timer.delay(0.15);
+    time.delay(0.15);
 
     m_DriveBase.setRight(0.0);
     m_DriveBase.setLeft(0.0);
@@ -123,11 +122,11 @@ public class DriveForDistance extends CommandBase {
     
   public void brake(){
     if(revrse){
-     m_DriveBase.setRight(-0.1);
-     m_DriveBase.setLeft(-0.1);
+      m_DriveBase.setRight(-0.1);
+      m_DriveBase.setLeft(-0.1);
     }else{
-     m_DriveBase.setRight(0.1);
-     m_DriveBase.setLeft(0.1);
+      m_DriveBase.setRight(0.1);
+      m_DriveBase.setLeft(0.1);
     }
   }
   

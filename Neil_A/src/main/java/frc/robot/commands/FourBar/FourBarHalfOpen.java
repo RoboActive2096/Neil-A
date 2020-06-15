@@ -8,6 +8,7 @@
 package frc.robot.commands.FourBar;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FourBar;
 
@@ -36,7 +37,7 @@ public class FourBarHalfOpen extends CommandBase {
   @Override
   public void execute() {
 
-    m_FourBar.setFourbarSpeed(-0.55);
+    m_FourBar.setFourbarSpeed(-0.5);
   }
 
   // Called once the command ends or is interrupted.
@@ -48,7 +49,7 @@ public class FourBarHalfOpen extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(time.get()>0.28){
+    if(time.get()>0.3){
       return true;
     }else{
       return false;
